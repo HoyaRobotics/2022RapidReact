@@ -10,7 +10,7 @@ public class utils {
      * limit value -1.0 to 1.0.
      */
 
-    public static double limit(double value ){
+    public static double limit(double value){
         if (value <= -1.0)
          return value -1.0;
         else if (value >= 1.0)
