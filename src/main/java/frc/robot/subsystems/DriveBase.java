@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -23,6 +24,7 @@ import static frc.robot.Constants.*;
 
 public class DriveBase extends SubsystemBase {
 
+  private static final TalonFXInvertType invertType = null;
   private final WPI_TalonFX leftLeader = new WPI_TalonFX(FRONT_LEFT_DRIVE);
   private final WPI_TalonFX rightLeader = new WPI_TalonFX(FRONT_RIGHT_DRIVE);
   private final WPI_TalonFX leftFollower = new WPI_TalonFX(REAR_LEFT_DRIVE);
@@ -33,9 +35,9 @@ public class DriveBase extends SubsystemBase {
   /** Creates a new DriveBase. */
   public DriveBase() {
     leftLeader.configFactoryDefault();
-    rightLeader.configFactoryDefault();
+    rightLeader.setInverted(invertType);
     leftFollower.configFactoryDefault();
-    rightFollower.configFactoryDefault();
+    rightFollower.setInverted(invertType);
 
     SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
     leftLeader.configSupplyCurrentLimit(supplyLimit);
