@@ -39,10 +39,10 @@ public final class Constants {
 
     
         //CANbus ids
-        public static final int FRONT_LEFT_DRIVE = 0; 
-        public static final int FRONT_RIGHT_DRIVE = 1;
-        public static final int REAR_LEFT_DRIVE = 2;
-        public static final int REAR_RIGHT_DRIVE = 3;
+        public static final int FRONT_LEFT_DRIVE = 23; 
+        public static final int FRONT_RIGHT_DRIVE = 22;
+        public static final int REAR_LEFT_DRIVE = 25;
+        public static final int REAR_RIGHT_DRIVE = 24;
 
         //Intake
 
