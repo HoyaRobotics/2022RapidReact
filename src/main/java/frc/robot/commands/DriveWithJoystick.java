@@ -1,5 +1,7 @@
 package frc.robot.commands;
 
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import java.util.function.DoubleSupplier;
@@ -35,6 +37,7 @@ public class DriveWithJoystick extends CommandBase{
             utils.applydeadband(throttle.getAsDouble(), Constants.CONTROL_DEADBAND),
             utils.applydeadband(rotation.getAsDouble(), Constants.CONTROL_DEADBAND)
         );
+        SmartDashboard.putNumber("test", 1);
     }
 
     @Override

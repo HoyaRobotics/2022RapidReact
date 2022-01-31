@@ -3,10 +3,11 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.*;
@@ -24,20 +25,25 @@ import static frc.robot.Constants.*;
 
 public class DriveBase extends SubsystemBase {
 
-  private static final TalonFXInvertType invertType = null;
   private final WPI_TalonFX leftLeader = new WPI_TalonFX(FRONT_LEFT_DRIVE);
   private final WPI_TalonFX rightLeader = new WPI_TalonFX(FRONT_RIGHT_DRIVE);
   private final WPI_TalonFX leftFollower = new WPI_TalonFX(REAR_LEFT_DRIVE);
   private final WPI_TalonFX rightFollower = new WPI_TalonFX(REAR_RIGHT_DRIVE);
 
-  private final DifferentialDrive drive = new DifferentialDrive(leftLeader, rightLeader);
+  MotorControllerGroup m_left = new MotorControllerGroup(leftLeader,leftFollower);
+  MotorControllerGroup m_right = new MotorControllerGroup(rightLeader,rightFollower);
+
+  private final DifferentialDrive drive = new DifferentialDrive(m_left, m_right);
 
   /** Creates a new DriveBase. */
   public DriveBase() {
     leftLeader.configFactoryDefault();
-    rightLeader.setInverted(invertType);
+    rightLeader.configFactoryDefault();
     leftFollower.configFactoryDefault();
-    rightFollower.setInverted(invertType);
+    rightFollower.configFactoryDefault();
+
+  leftLeader.setInverted(true);
+  leftFollower.setInverted(true);
 
     SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
     leftLeader.configSupplyCurrentLimit(supplyLimit);
@@ -52,6 +58,7 @@ public class DriveBase extends SubsystemBase {
 
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader);
+
   }
 
   public void zeroEncoders(){
@@ -76,7 +83,8 @@ public class DriveBase extends SubsystemBase {
    */
   public void arcadeDrive(double throttle, double rotation){
     rotation *= -1;
-
+    SmartDashboard.putNumber("THROTTLE rr", throttle);
+    SmartDashboard.putNumber("Rotation rr", rotation);
     drive.arcadeDrive(throttle, rotation);
   }
 

@@ -16,7 +16,7 @@ public final class Constants {
                          
                      }
                 }
-             }
+            }
              public static final int RUN_INTAKE_FWD = Button.kRightBumper.value;
              public static final int RUN_INTAKE_BWD = Button.kLeftBumper.value;
              public static final int TOGGLE_INTAKE_RAISED = Button.kX.value;
@@ -49,5 +49,9 @@ public final class Constants {
     
         //Drivebase
         public static final double CONTROL_DEADBAND = 0.10;
+        public static final int SENSOR_UNITS_PER_ROTATION = 2048;
+        public static final int ENCODER_UNITS_PER_ROTATION = 24140;
+        public static final int ACCEL_UNITS = 473000;
+        public static final int DECEL_UNITS = ACCEL_UNITS;
         
     }
