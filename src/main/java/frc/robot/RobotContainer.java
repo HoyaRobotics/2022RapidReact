@@ -20,6 +20,7 @@ public class RobotContainer {
   private final XboxController driver = new XboxController(DRIVER);
 
   private final DriveBase driveBase = new DriveBase();
+  private final Turret turret = new Turret();
 
 
   private final ColorSensor colorSensor = new ColorSensor();
@@ -48,6 +49,4 @@ public class RobotContainer {
     return null;
 
   }
-  
-  
 }

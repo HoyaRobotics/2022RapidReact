@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-  public Intake() {}
+  public Intake() {
+    System.out.println("Intake constructor called");
+  }
 
   @Override
   public void periodic() {

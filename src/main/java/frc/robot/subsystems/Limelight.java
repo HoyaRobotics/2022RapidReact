@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase {
   /** Creates a new Limelight. */
-  public Limelight() {}
+  public Limelight() {
+    System.out.println("Limelight constructor called");
+  }
 
   @Override
   public void periodic() {

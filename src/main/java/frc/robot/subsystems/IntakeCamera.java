@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeCamera extends SubsystemBase {
   /** Creates a new IntakeCamera. */
-  public IntakeCamera() {}
+  public IntakeCamera() {
+    System.out.println("IntakeCamera constructor called");
+  }
 
   @Override
   public void periodic() {

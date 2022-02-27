@@ -24,6 +24,7 @@ public class ColorSensor extends SubsystemBase {
   
   /** Creates a new ColorSensor. */
   public ColorSensor() {
+    System.out.println("ColourSensor constructor called");
     m_colorMatcher.addColorMatch(kBlueTarget);
    // m_colorMatcher.addColorMatch(kRedTarget);
   }
@@ -48,7 +49,7 @@ public class ColorSensor extends SubsystemBase {
      * sensor.
      */
     SmartDashboard.putNumber("Red", detectedColor.red);
-
+    System.out.println("Here is my message");
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
 //    SmartDashboard.putString("Detected Color", colorString);

@@ -37,6 +37,7 @@ public class DriveBase extends SubsystemBase {
 
   /** Creates a new DriveBase. */
   public DriveBase() {
+    SmartDashboard.putString("drivebase", "drive");
     leftLeader.configFactoryDefault();
     rightLeader.configFactoryDefault();
     leftFollower.configFactoryDefault();

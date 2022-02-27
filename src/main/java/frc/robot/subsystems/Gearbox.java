@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Gearbox extends SubsystemBase {
   /** Creates a new Gearbox. */
-  public Gearbox() {}
+  public Gearbox() {
+    System.out.println("Gearbox constructor called");
+  }
 
   @Override
   public void periodic() {

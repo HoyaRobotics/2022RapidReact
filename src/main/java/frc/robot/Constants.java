@@ -43,6 +43,15 @@ public final class Constants {
         public static final int FRONT_RIGHT_DRIVE = 22;
         public static final int REAR_LEFT_DRIVE = 25;
         public static final int REAR_RIGHT_DRIVE = 24;
+        public static final int TURRET_ROTATOR = 4;
+        public static final int INTAKE_INTERNAL_ROLLER_LEADER = 5;
+        public static final int INTAKE_INTERNAL_ROLLER_FOLLOWER = 6;
+        public static final int INTAKE_EXTERNAL_ROLLER = 7;
+        public static final int SHOOTER_LEFT = 8;
+        public static final int SHOOTER_RIGHT = 9;
+        public static final int CLIMBER_VERTICAL_1 = 10;
+        public static final int CLIMBER_VERTICAL_2 = 11;
+        public static final int CLIMBER_HORIZONTAL = 12;
 
         //Intake
 
@@ -54,4 +63,8 @@ public final class Constants {
         public static final int ACCEL_UNITS = 473000;
         public static final int DECEL_UNITS = ACCEL_UNITS;
         
+        //Turret
+        public static final double TURRET_P = 0.05;
+        public static final double TURRET_SENSITIVITY_DEGREES = 0.5;
+        public static final double TURRET_SENSITIVITY_VELOCITY = 0;
     }

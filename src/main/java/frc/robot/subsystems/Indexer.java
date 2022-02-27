@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Indexer extends SubsystemBase {
   /** Creates a new Indexer. */
-  public Indexer() {}
+  public Indexer() {
+    System.out.println("Indexer constructor called");
+  }
 
   @Override
   public void periodic() {

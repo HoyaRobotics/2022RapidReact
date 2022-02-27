@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Cilmber extends SubsystemBase {
   /** Creates a new Cilmber. */
-  public Cilmber() {}
+  public Cilmber() {
+    System.out.println("Climber constructor called");
+  }
 
   @Override
   public void periodic() {
