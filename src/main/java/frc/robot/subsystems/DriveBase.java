@@ -69,6 +69,14 @@ public class DriveBase extends SubsystemBase {
     rightFollower.getSensorCollection().setIntegratedSensorPosition(0, 30);
   }
 
+  public double getLeftEncoder(){
+    return leftLeader.getSelectedSensorPosition();
+  }
+
+  public double getRightEncoder(){
+    return rightLeader.getSelectedSensorPosition();
+  }
+
   public double getPosition(){
     return 0;
     //return rightLeader.getSensorCollection().GetIntergratedSensorPosition();
@@ -88,5 +96,4 @@ public class DriveBase extends SubsystemBase {
     SmartDashboard.putNumber("Rotation rr", rotation);
     drive.arcadeDrive(throttle, rotation);
   }
-
 }

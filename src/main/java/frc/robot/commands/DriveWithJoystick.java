@@ -37,7 +37,6 @@ public class DriveWithJoystick extends CommandBase{
             utils.applydeadband(throttle.getAsDouble(), Constants.CONTROL_DEADBAND),
             utils.applydeadband(rotation.getAsDouble(), Constants.CONTROL_DEADBAND)
         );
-        SmartDashboard.putNumber("test", 1);
     }
 
     @Override
