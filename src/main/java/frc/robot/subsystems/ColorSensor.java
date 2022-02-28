@@ -49,7 +49,7 @@ public class ColorSensor extends SubsystemBase {
      * sensor.
      */
     SmartDashboard.putNumber("Red", detectedColor.red);
-    System.out.println("Here is my message");
+    //System.out.println("Here is my message");
     SmartDashboard.putNumber("Blue", detectedColor.blue);
     SmartDashboard.putNumber("Confidence", match.confidence);
 //    SmartDashboard.putString("Detected Color", colorString);

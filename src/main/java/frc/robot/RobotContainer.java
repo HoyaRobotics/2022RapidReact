@@ -61,6 +61,7 @@ public class RobotContainer {
     ));
 
     JoystickButton toggleIntakeRaised = new JoystickButton(driver, Controls.TOGGLE_INTAKE_RAISED);
+    toggleIntakeRaised.whenPressed(new InstantCommand(() -> {intake.toggleRaised();}));
   }
 
   /**
