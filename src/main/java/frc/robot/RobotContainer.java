@@ -36,11 +36,9 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    
-
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setInternalRoller(1.0);
+      intake.setInternalRoller(-1.0);
     }
     ));
 
@@ -51,7 +49,7 @@ public class RobotContainer {
 
     JoystickButton runIntakeRvs = new JoystickButton(driver,Controls.RUN_INTAKE_RVS);
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setInternalRoller(-1.0);
+      intake.setInternalRoller(1.0);
     }
     ));
 
@@ -62,6 +60,10 @@ public class RobotContainer {
 
     JoystickButton toggleIntakeRaised = new JoystickButton(driver, Controls.TOGGLE_INTAKE_RAISED);
     toggleIntakeRaised.whenPressed(new InstantCommand(() -> {intake.toggleRaised();}));
+
+    //GenericHID d_pad = new GenericHID(driver, Controls.RUN_INDEXER_FWD);
+
+    //SmartDashboard.putNumber("D-Pad value", d_pad.getRawAxis(0))
   }
 
   /**
