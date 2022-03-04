@@ -8,8 +8,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Indexer extends SubsystemBase {
   /** Creates a new Indexer. */
+
+  //private final CANSparkMax roller = new CANSparkMax(INTAKE_EXTERNAL_ROLLER, MorotType.kBrushless);
+
+
   public Indexer() {
     System.out.println("Indexer constructor called");
+  }
+
+  public void startMotor(double speed){
+    //roller.set(Utils.limit(speed));
   }
 
   @Override

@@ -87,9 +87,9 @@ public class DriveBase extends SubsystemBase {
     //return rightMaster.getSensorCollection().getIntergratedSensorVelocity();
   }
 
-  /**
-   * Drives the robot with aracde controls, supplying throttle and rotation.
-   */
+  
+    //Drives the robot with arcade controls, supplying throttle and rotation.
+   
   public void arcadeDrive(double throttle, double rotation){
     rotation *= -1;
     SmartDashboard.putNumber("THROTTLE rr", throttle);

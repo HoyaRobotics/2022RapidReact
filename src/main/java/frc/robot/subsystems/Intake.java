@@ -24,7 +24,6 @@ public class Intake extends SubsystemBase {
   }
 
   public void setRaised(boolean raised){
-    System.out.println("Intake raised command");
     if(this.raised != raised)
       this.raised = raised;
 
@@ -34,7 +33,6 @@ public class Intake extends SubsystemBase {
   public void toggleRaised(){
     setRaised(!raised);
   }
-
   public void setInternalRoller(double speed){
     internalRoller.set(ControlMode.PercentOutput, speed);
     System.out.println("Set roller " + ControlMode.PercentOutput);
