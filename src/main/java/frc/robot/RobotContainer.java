@@ -38,20 +38,13 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("intake");
-
-    NetworkTableEntry intakeEntry = table.getEntry("speed");
-
-    double intakeSpeed = 0;
-    intakeEntry.setDouble(intakeSpeed);
-
     driveBase.setDefaultCommand(new DriveWithJoystick(driveBase, () -> driver.getLeftY(), () -> driver.getLeftX()));
     // Configure the button bindings
     configureButtonBindings();
 
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setIntakeRoller(-intakeSpeed);
+      intake.setIntakeRoller(intake.getSpeed());
     }
     ));
 
@@ -62,7 +55,7 @@ public class RobotContainer {
 
     JoystickButton runIntakeRvs = new JoystickButton(driver,Controls.RUN_INTAKE_RVS);
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setIntakeRoller(intakeSpeed);
+      intake.setIntakeRoller(1.0);
     }
     ));
 

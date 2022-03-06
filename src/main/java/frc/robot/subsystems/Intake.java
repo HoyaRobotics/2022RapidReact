@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -22,7 +22,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends SubsystemBase {
   private final Solenoid raiser = new Solenoid(PneumaticsModuleType.REVPH, Constants.INTAKE_RAISER);
 
-  private final WPI_TalonSRX IntakeRoller = new WPI_TalonSRX(Constants.INTAKE_INTERNAL_ROLLER);
+  private final WPI_TalonSRX IntakeRoller = new WPI_TalonSRX(Constants.INTAKE_ROLLER);
   //private final CANSparkMax sparkMax = new CANSparkMax(Constants.storageRoller, MotorType.kBrushless)
 
   private boolean raised = false;
@@ -40,8 +40,11 @@ public class Intake extends SubsystemBase {
   public void toggleRaised(){
     setRaised(!raised);
   }
+  public double getSpeed(){
+    SmartDashboard.putNumber("speed gotten?", SmartDashboard.getNumber("intake speed", 0));
+    return SmartDashboard.getNumber("intake speed", 0);
+  }
   public void setIntakeRoller(double speed){
     IntakeRoller.set(ControlMode.PercentOutput, speed);
-    System.out.println("Set roller " + ControlMode.PercentOutput);
   }
 }

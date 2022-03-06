@@ -24,7 +24,6 @@ public class ColorSensor extends SubsystemBase {
   
   /** Creates a new ColorSensor. */
   public ColorSensor() {
-    System.out.println("ColourSensor constructor called");
     m_colorMatcher.addColorMatch(kBlueTarget);
    // m_colorMatcher.addColorMatch(kRedTarget);
   }
@@ -38,7 +37,6 @@ public class ColorSensor extends SubsystemBase {
 
     //Attempting to measure proximity with the color sensor. -Ethan, 2022-03-05
     int proximity = m_colorSensor.getProximity();
-    System.out.println(proximity);//Can be removed later, I want to see what value the other wall of the robot is(TBD).
 
     if (match.color == kBlueTarget) {
       colorString = "Blue";
@@ -59,6 +57,11 @@ public class ColorSensor extends SubsystemBase {
     SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putNumber("Proximity", proximity);//Adding proximity values to the SmartDashboard.
 //    SmartDashboard.putString("Detected Color", colorString);
+    if(proximity > 100)
+      SmartDashboard.putString("is ball in?", "yes");
+    else
+      SmartDashboard.putString("is ball in?", "no");
+
     
     /* NOTE: Storage roller is the internal roller. Needs to be clarified and properly defined. Confusion regarding which roller is the "internal". Waiting on clarification from programming lead/McTavish.
     while(proximity > (TBD - 10) ){//Small buffer window of 10, so a collision knocking the camera or robot wall to one another doesn't cause this to run. Might be uneeded? Not sure.

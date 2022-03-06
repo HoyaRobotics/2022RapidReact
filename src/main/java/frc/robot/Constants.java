@@ -42,11 +42,11 @@ public final class Constants {
         public static final int REAR_RIGHT_DRIVE = 24;
         public static final int INDEXER = 26;
         public static final int TURRET_ROTATOR = 27;
-        public static final int INTAKE_INTERNAL_ROLLER = 28;
+        public static final int INTAKE_ROLLER = 28;
         //public static final int INTAKE_INTERNAL_ROLLER_FOLLOWER = 6;
         //public static final int INTAKE_EXTERNAL_ROLLER = 7;
-        public static final int SHOOTER_LEFT = 29;
-        public static final int SHOOTER_RIGHT = 30;
+        public static final int SHOOTER_LEFT = 11;
+        public static final int SHOOTER_RIGHT = 12;
         public static final int CLIMBER_VERTICAL_1 = 31;
         public static final int CLIMBER_VERTICAL_2 = 32;
         //public static final int CLIMBER_HORIZONTAL = 12;
