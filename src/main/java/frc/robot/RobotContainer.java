@@ -38,23 +38,23 @@ public class RobotContainer {
 
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setInternalRoller(-1.0);
+      intake.setIntakeRoller(-1.0);
     }
     ));
 
     runIntakeFwd.whenReleased(new InstantCommand(() ->{
-      intake.setInternalRoller(0);
+      intake.setIntakeRoller(0);
     }
     ));
 
     JoystickButton runIntakeRvs = new JoystickButton(driver,Controls.RUN_INTAKE_RVS);
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setInternalRoller(1.0);
+      intake.setIntakeRoller(1.0);
     }
     ));
 
     runIntakeRvs.whenReleased(new InstantCommand(() ->{
-      intake.setInternalRoller(0);
+      intake.setIntakeRoller(0);
     }
     ));
 
