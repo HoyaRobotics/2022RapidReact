@@ -13,6 +13,8 @@ public class DriveForDistance extends CommandBase {
   private final DriveBase driveBase;
   private final double speed;
   private final double distance;
+
+  private int distTarget = 0;
   //private final double encoderValue;
 
   //private double target = distance * "encoder value for 1 foot";
@@ -21,6 +23,8 @@ public class DriveForDistance extends CommandBase {
     this.driveBase = driveBase;
     this.speed = speed;
     this.distance = distance;
+
+    distTarget = (int)(distance*341);
 
     addRequirements(driveBase);
   }
@@ -36,6 +40,11 @@ public class DriveForDistance extends CommandBase {
   public void execute() {
     SmartDashboard.putNumber("left encoder", this.driveBase.getLeftEncoder());
     SmartDashboard.putNumber("right encoder", this.driveBase.getRightEncoder());
+
+    while(this.driveBase.getLeftEncoder() < distTarget)
+    {
+      driveBase.arcadeDrive(-speed, 0);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -45,6 +54,7 @@ public class DriveForDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    driveBase.arcadeDrive(0, 0);
     return false;
   }
 }

@@ -11,6 +11,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -32,13 +37,21 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("intake");
+
+    NetworkTableEntry intakeEntry = table.getEntry("speed");
+
+    double intakeSpeed = 0;
+    intakeEntry.setDouble(intakeSpeed);
+
     driveBase.setDefaultCommand(new DriveWithJoystick(driveBase, () -> driver.getLeftY(), () -> driver.getLeftX()));
     // Configure the button bindings
     configureButtonBindings();
 
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setIntakeRoller(-1.0);
+      intake.setIntakeRoller(-intakeSpeed);
     }
     ));
 
@@ -49,7 +62,7 @@ public class RobotContainer {
 
     JoystickButton runIntakeRvs = new JoystickButton(driver,Controls.RUN_INTAKE_RVS);
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setIntakeRoller(1.0);
+      intake.setIntakeRoller(intakeSpeed);
     }
     ));
 
