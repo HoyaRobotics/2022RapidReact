@@ -14,18 +14,15 @@ public class DriveForDistance extends CommandBase {
   private final double speed;
   private final double distance;
 
-  private int distTarget = 0;
-  //private final double encoderValue;
-
-  //private double target = distance * "encoder value for 1 foot";
+  private double distTarget = 0;
   
   public DriveForDistance(DriveBase driveBase, double speed, double distance) {
     this.driveBase = driveBase;
     this.speed = speed;
     this.distance = distance;
 
-    distTarget = (int)(distance*341);
-
+    distTarget = (int)(distance*341 / 10.71);
+    //341 is the encoder value for one inch of rotation, 10.71 is the gear ratio found at https://andymark-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMjIvMDEvMDYvMDkvNDYvMTQvMzEyNTA3ZGYtZDFlOS00MWYzLWJiODEtYzZmMDJjYTFjM2YwL0FNMTRVNV9Vc2VyR3VpZGVfMjAyMi5wZGYiXV0/AM14U5_UserGuide_2022.pdf?sha=778f29ff5a4ccf8d
     addRequirements(driveBase);
   }
 
@@ -41,7 +38,7 @@ public class DriveForDistance extends CommandBase {
     SmartDashboard.putNumber("left encoder", this.driveBase.getLeftEncoder());
     SmartDashboard.putNumber("right encoder", this.driveBase.getRightEncoder());
 
-    while(this.driveBase.getLeftEncoder() < distTarget)
+    while(Math.abs(this.driveBase.getLeftEncoder()) < distTarget)
     {
       driveBase.arcadeDrive(-speed, 0);
     }
@@ -49,12 +46,14 @@ public class DriveForDistance extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    driveBase.arcadeDrive(0, 0);
+    
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    driveBase.arcadeDrive(0, 0);
-    return false;
+    return (this.driveBase.getLeftEncoder() >= distTarget);
   }
 }

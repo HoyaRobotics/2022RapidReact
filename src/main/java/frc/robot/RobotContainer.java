@@ -94,7 +94,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-      new DriveForTime(driveBase, 0.6, 4) 
+      new DriveForTime(driveBase, 0.6, 4),
+      new DriveForDistance(driveBase, 0.6, 15)
     );
   }
 }

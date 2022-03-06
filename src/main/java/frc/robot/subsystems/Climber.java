@@ -6,9 +6,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Cilmber extends SubsystemBase {
-  /** Creates a new Cilmber. */
-  public Cilmber() {
+public class Climber extends SubsystemBase {
+  /** Creates a new Climber. */
+  public Climber() {
     System.out.println("Climber constructor called");
   }
 
