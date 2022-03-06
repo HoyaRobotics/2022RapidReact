@@ -62,7 +62,7 @@ public class ColorSensor extends SubsystemBase {
     
     /* NOTE: Storage roller is the internal roller. Needs to be clarified and properly defined. Confusion regarding which roller is the "internal". Waiting on clarification from programming lead/McTavish.
     while(proximity > (TBD - 10) ){//Small buffer window of 10, so a collision knocking the camera or robot wall to one another doesn't cause this to run. Might be uneeded? Not sure.
-      intake.setStorageRoller(10);//Function needs to be defined, likely a copy of setInternalRoller();. Additionally, is speed based on RPM? 
+      intake.setStorageRoller(10);//Function needs to be defined, likely a copy of setIntakeRoller();. Additionally, is speed based on RPM? 
     }*/
   }
 }

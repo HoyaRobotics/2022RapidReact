@@ -22,7 +22,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Intake extends SubsystemBase {
   private final Solenoid raiser = new Solenoid(PneumaticsModuleType.REVPH, Constants.INTAKE_RAISER);
 
-  private final WPI_TalonSRX internalRoller = new WPI_TalonSRX(Constants.INTAKE_INTERNAL_ROLLER);
+  private final WPI_TalonSRX IntakeRoller = new WPI_TalonSRX(Constants.INTAKE_INTERNAL_ROLLER);
   //private final CANSparkMax sparkMax = new CANSparkMax(Constants.storageRoller, MotorType.kBrushless)
 
   private boolean raised = false;
@@ -40,8 +40,8 @@ public class Intake extends SubsystemBase {
   public void toggleRaised(){
     setRaised(!raised);
   }
-  public void setInternalRoller(double speed){
-    internalRoller.set(ControlMode.PercentOutput, speed);
+  public void setIntakeRoller(double speed){
+    IntakeRoller.set(ControlMode.PercentOutput, speed);
     System.out.println("Set roller " + ControlMode.PercentOutput);
   }
 }
