@@ -19,6 +19,7 @@ public class ColorSensor extends SubsystemBase {
   private final ColorMatch m_colorMatcher = new ColorMatch();
   private final Color kBlueTarget = new Color(0.143, 0.427, 0.429);
   private final Color kRedTarget = new Color(0.561, 0.232, 0.114);
+  private  int proximity = 0;
 //  private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
  // private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   
@@ -30,21 +31,25 @@ public class ColorSensor extends SubsystemBase {
 
   @Override
   public void periodic() {
+    //McT edit - March 7 - no longer getting colour.
     // This method will be called once per scheduler run
-    Color detectedColor = m_colorSensor.getColor();
+    /*Color detectedColor = m_colorSensor.getColor();
     String colorString;
-    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);
+    ColorMatchResult match = m_colorMatcher.matchClosestColor(detectedColor);*/
+
 
     //Attempting to measure proximity with the color sensor. -Ethan, 2022-03-05
-    int proximity = m_colorSensor.getProximity();
+    proximity = m_colorSensor.getProximity();//McT note - declared as class object
 
-    if (match.color == kBlueTarget) {
+    //McT edit - March 7 - no longer getting colour.
+    /*if (match.color == kBlueTarget) {
       colorString = "Blue";
     } else if (match.color == kRedTarget) {
       colorString = "Red";
     } else {
       colorString = "Unknown";
     }
+    */
 
 
 
@@ -52,9 +57,9 @@ public class ColorSensor extends SubsystemBase {
      * Open Smart Dashboard or Shuffleboard to see the color detected by the 
      * sensor.
      */
-    SmartDashboard.putNumber("Red", detectedColor.red);
-    SmartDashboard.putNumber("Blue", detectedColor.blue);
-    SmartDashboard.putNumber("Confidence", match.confidence);
+    //SmartDashboard.putNumber("Red", detectedColor.red);
+    //SmartDashboard.putNumber("Blue", detectedColor.blue);
+    //SmartDashboard.putNumber("Confidence", match.confidence);
     SmartDashboard.putNumber("Proximity", proximity);//Adding proximity values to the SmartDashboard.
 //    SmartDashboard.putString("Detected Color", colorString);
     if(proximity > 100)
@@ -68,4 +73,12 @@ public class ColorSensor extends SubsystemBase {
       intake.setStorageRoller(10);//Function needs to be defined, likely a copy of setIntakeRoller();. Additionally, is speed based on RPM? 
     }*/
   }
+  public boolean ballInStorage(){
+    if(proximity > 100)
+      return true;
+    else
+      return false;
+  }
+
+
 }

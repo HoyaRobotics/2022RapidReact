@@ -19,18 +19,23 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class Intake extends SubsystemBase {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class Intakev2 extends SubsystemBase {
+  //solenoids and motors intake uses
   private final Solenoid raiser = new Solenoid(PneumaticsModuleType.REVPH, Constants.INTAKE_RAISER);
-
   private final WPI_TalonSRX IntakeRoller = new WPI_TalonSRX(Constants.INTAKE_ROLLER);
-  //private final CANSparkMax sparkMax = new CANSparkMax(Constants.storageRoller, MotorType.kBrushless)
+  private boolean raised = true;//flag to ensure intake starts raised.
 
-  private boolean raised = false;
+  /** Creates a new Intakev2. */
+  public Intakev2() {}
 
-  public Intake() {
-    
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
   }
 
+  /*Used to raise or lower the intake*/
   public void setRaised(boolean raised){
     if(this.raised != raised)
       this.raised = raised;
@@ -38,15 +43,16 @@ public class Intake extends SubsystemBase {
     raiser.set(!this.raised);
   }
 
+  /*Changes the intake status (raises if lowered, lowers if raised)*/
   public void toggleRaised(){
     setRaised(!raised);
   }
+
   public double getSpeed(){
-//    SmartDashboard.putNumber("speed gotten?", SmartDashboard.getNumber("intake speed", 0));
-    return SmartDashboard.getNumber("Intake Speed McT",0);
+    SmartDashboard.putNumber("speed gotten?", SmartDashboard.getNumber("intake speed", 0));
+    return SmartDashboard.getNumber("intake speed", 0);
   }
-  public void setIntakeRoller(double speed, boolean direction){
-    SmartDashboard.putBoolean("Forward",direction);
+  public void setIntakeRoller(double speed){
     IntakeRoller.set(ControlMode.PercentOutput, speed);
   }
 }

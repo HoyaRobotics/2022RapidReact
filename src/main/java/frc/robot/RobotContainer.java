@@ -31,6 +31,7 @@ public class RobotContainer {
   private final DriveBase driveBase = new DriveBase();
   private final Turret turret = new Turret();
   private final Intake intake = new Intake();
+  //private final Intakev2 intakev2 = new Intakev2();
 
 
   private final ColorSensor colorSensor = new ColorSensor();
@@ -42,31 +43,35 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
+    /*Mct - intake, this is the old way to call it*/
     runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setIntakeRoller(intake.getSpeed());
+      intake.setIntakeRoller(intake.getSpeed(),true);
     }
-    ));
-
+    ));//*/
+    /*McT new intake
+    runIntakeFwd.whenPressed(new IntakeBall(intakev2, colorSensor));
+/*McT - old intake*/
     runIntakeFwd.whenReleased(new InstantCommand(() ->{
-      intake.setIntakeRoller(0);
+      intake.setIntakeRoller(0,true);
     }
     ));
 
     JoystickButton runIntakeRvs = new JoystickButton(driver,Controls.RUN_INTAKE_RVS);
-    runIntakeFwd.whenPressed(new InstantCommand(() -> {
-      intake.setIntakeRoller(1.0);
+    runIntakeRvs.whenPressed(new InstantCommand(() -> {
+      intake.setIntakeRoller(intake.getSpeed()*-1,false);
     }
     ));
 
     runIntakeRvs.whenReleased(new InstantCommand(() ->{
-      intake.setIntakeRoller(0);
+      intake.setIntakeRoller(0,false);
     }
     ));
 
     JoystickButton toggleIntakeRaised = new JoystickButton(driver, Controls.TOGGLE_INTAKE_RAISED);
     toggleIntakeRaised.whenPressed(new InstantCommand(() -> {intake.toggleRaised();}));
-
+//end old intake*/
     //GenericHID d_pad = new GenericHID(driver, Controls.RUN_INDEXER_FWD);
 
     //SmartDashboard.putNumber("D-Pad value", d_pad.getRawAxis(0))
