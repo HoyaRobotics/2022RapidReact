@@ -46,12 +46,12 @@ public class RobotContainer {
     
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     /*Mct - intake, this is the old way to call it*/
-    runIntakeFwd.whenPressed(new InstantCommand(() -> {
+    runIntakeFwd.whileHeld(new InstantCommand(() -> {
       intake.setIntakeRoller(intake.getSpeed(),true);
     }
     ));//*/
     /*McT new intake
-    runIntakeFwd.whenPressed(new IntakeBall(intakev2, colorSensor));
+    runIntakeFwd.whileHeld(new IntakeBall(intakev2, colorSensor));
 /*McT - old intake*/
     runIntakeFwd.whenReleased(new InstantCommand(() ->{
       intake.setIntakeRoller(0,true);
@@ -59,7 +59,7 @@ public class RobotContainer {
     ));
 
     JoystickButton runIntakeRvs = new JoystickButton(driver,Controls.RUN_INTAKE_RVS);
-    runIntakeRvs.whenPressed(new InstantCommand(() -> {
+    runIntakeRvs.whileHeld(new InstantCommand(() -> {
       intake.setIntakeRoller(intake.getSpeed()*-1,false);
     }
     ));
@@ -70,7 +70,7 @@ public class RobotContainer {
     ));
 
     JoystickButton toggleIntakeRaised = new JoystickButton(driver, Controls.TOGGLE_INTAKE_RAISED);
-    toggleIntakeRaised.whenPressed(new InstantCommand(() -> {intake.toggleRaised();}));
+    toggleIntakeRaised.whileHeld(new InstantCommand(() -> {intake.toggleRaised();}));
 //end old intake*/
     //GenericHID d_pad = new GenericHID(driver, Controls.RUN_INDEXER_FWD);
 
