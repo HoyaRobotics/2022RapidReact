@@ -70,4 +70,9 @@ public final class Constants {
         public static final double TURRET_P = 0.05;
         public static final double TURRET_SENSITIVITY_DEGREES = 0.5;
         public static final double TURRET_SENSITIVITY_VELOCITY = 0;
+
+        //Shooter
+        public static final double SHOOTER_FF = 0.00019;
+        public static final double SHOOTER_P = 0.0003;
+        public static final double RPM_STABILITY_ERROR = 25;
     }
