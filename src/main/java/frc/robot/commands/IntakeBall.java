@@ -36,6 +36,7 @@ public class IntakeBall extends CommandBase {
   @Override
   public void execute() {
     this.intake.setIntakeRoller(-1.0);
+    SmartDashboard.putString("McT","Hi");
     if(this.proximitySensor.ballInStorage()){
       SmartDashboard.putString("McT","Storage in use");
       storage.setIndexerRoller(0.0);
@@ -48,8 +49,11 @@ public class IntakeBall extends CommandBase {
   }
 
   // Called once the command ends or is interrupted.
-/*  @Override
-  public void end(boolean interrupted) {}*/
+  @Override
+  public void end(boolean interrupted) {
+    storage.setIndexerRoller(0.0);
+    this.intake.setIntakeRoller(0.0);
+  }
 
   // Returns true when the command should end.
   /*@Override

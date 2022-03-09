@@ -30,7 +30,8 @@ public class RobotContainer {
 
   private final DriveBase driveBase = new DriveBase();
   private final Turret turret = new Turret();
-  private final Intake intake = new Intake();
+  private final Intakev2 intake = new Intakev2();
+  private final Storage storage = new Storage();
   //private final Intakev2 intakev2 = new Intakev2();
 
 
@@ -46,6 +47,7 @@ public class RobotContainer {
     
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     /*Mct - intake, this is the old way to call it*/
+    runIntakeFwd.whileHeld(new IntakeBall(intake, colorSensor, storage));/*
     runIntakeFwd.whileHeld(new InstantCommand(() -> {
       intake.setIntakeRoller(intake.getSpeed(),true);
     }
@@ -53,12 +55,12 @@ public class RobotContainer {
     /*McT new intake
     runIntakeFwd.whileHeld(new IntakeBall(intakev2, colorSensor));
 /*McT - old intake*/
-    runIntakeFwd.whenReleased(new InstantCommand(() ->{
+  /*  runIntakeFwd.whenReleased(new InstantCommand(() ->{
       intake.setIntakeRoller(0,true);
     }
-    ));
+    ));*/
 
-    JoystickButton runIntakeRvs = new JoystickButton(driver,Controls.RUN_INTAKE_RVS);
+    /*JoystickButton runIntakeRvs = new JoystickButton(driver,Controls.RUN_INTAKE_RVS);
     runIntakeRvs.whileHeld(new InstantCommand(() -> {
       intake.setIntakeRoller(intake.getSpeed()*-1,false);
     }
@@ -67,7 +69,7 @@ public class RobotContainer {
     runIntakeRvs.whenReleased(new InstantCommand(() ->{
       intake.setIntakeRoller(0,false);
     }
-    ));
+    ));*/
 
     JoystickButton toggleIntakeRaised = new JoystickButton(driver, Controls.TOGGLE_INTAKE_RAISED);
     toggleIntakeRaised.whileHeld(new InstantCommand(() -> {intake.toggleRaised();}));
