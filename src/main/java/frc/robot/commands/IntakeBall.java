@@ -8,19 +8,24 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intakev2;
 import frc.robot.subsystems.ColorSensor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Storage;
 
 public class IntakeBall extends CommandBase {
   private final Intakev2 intake;
   private final ColorSensor proximitySensor;
+  private final Storage storage;
   private boolean running = false;
   private double speed = 0;
+  //private final Indexer indexer;
   /** Creates a new IntakeBall. */
-  public IntakeBall(Intakev2 intake, ColorSensor sensor) {
+  public IntakeBall(Intakev2 intake, ColorSensor sensor, Storage storage) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.proximitySensor = sensor;
     this.intake = intake;
+    this.storage = storage;
     addRequirements(this.intake);
     addRequirements(this.proximitySensor);
+    addRequirements(this.storage);
   }
 
   // Called when the command is initially scheduled.
@@ -33,8 +38,12 @@ public class IntakeBall extends CommandBase {
     this.intake.setIntakeRoller(-1.0);
     if(this.proximitySensor.ballInStorage()){
       SmartDashboard.putString("McT","Storage in use");
+      storage.setIndexerRoller(0.0);
+      //add line to set storage roller to 0
     }else{
       SmartDashboard.putString("McT","Nothing here");
+      storage.setIndexerRoller(0.3);
+      //add line to set storage roller to 0.3
     }
   }
 
