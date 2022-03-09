@@ -37,15 +37,15 @@ public class IntakeBall extends CommandBase {
   @Override
   public void execute() {
     this.intake.setIntakeRoller(-1.0);
-    SmartDashboard.putNumber("McT",counter);
+    //SmartDashboard.putNumber("McT",counter);
     counter++;
     if(this.proximitySensor.ballInStorage()){
       //SmartDashboard.putString("McT","Storage in use");
-      storage.setIndexerRoller(0.0);
+      this.storage.setIndexerRoller(0.0);
       //add line to set storage roller to 0
     }else{
       //SmartDashboard.putString("McT","Nothing here");
-      storage.setIndexerRoller(0.3);
+      this.storage.setIndexerRoller(0.3);
       //add line to set storage roller to 0.3
     }
   }

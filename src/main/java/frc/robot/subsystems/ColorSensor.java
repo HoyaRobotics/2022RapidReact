@@ -74,10 +74,15 @@ public class ColorSensor extends SubsystemBase {
     }*/
   }
   public boolean ballInStorage(){
-    if(proximity > 100)
-      return true;
-    else
+    
+    if(proximity > 100){
+    SmartDashboard.putBoolean("McT",true);
+    return true;
+    }
+    else{
+      SmartDashboard.putBoolean("McT",false);
       return false;
+    }
   }
 
 

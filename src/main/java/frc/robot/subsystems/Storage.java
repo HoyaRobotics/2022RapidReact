@@ -34,6 +34,6 @@ public class Storage extends SubsystemBase {
   }
   public void setIndexerRoller(double speed){
     //SmartDashboard.putBoolean("Forward",direction);
-    indexMotor.set(0.3) ;
+    this.indexMotor.set(speed) ;
   }
 }
