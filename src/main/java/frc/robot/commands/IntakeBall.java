@@ -16,6 +16,7 @@ public class IntakeBall extends CommandBase {
   private final Storage storage;
   private boolean running = false;
   private double speed = 0;
+  private int counter = 0;
   //private final Indexer indexer;
   /** Creates a new IntakeBall. */
   public IntakeBall(Intakev2 intake, ColorSensor sensor, Storage storage) {
@@ -36,13 +37,14 @@ public class IntakeBall extends CommandBase {
   @Override
   public void execute() {
     this.intake.setIntakeRoller(-1.0);
-    SmartDashboard.putString("McT","Hi");
+    SmartDashboard.putNumber("McT",counter);
+    counter++;
     if(this.proximitySensor.ballInStorage()){
-      SmartDashboard.putString("McT","Storage in use");
+      //SmartDashboard.putString("McT","Storage in use");
       storage.setIndexerRoller(0.0);
       //add line to set storage roller to 0
     }else{
-      SmartDashboard.putString("McT","Nothing here");
+      //SmartDashboard.putString("McT","Nothing here");
       storage.setIndexerRoller(0.3);
       //add line to set storage roller to 0.3
     }
