@@ -49,10 +49,12 @@ public class Intakev2 extends SubsystemBase {
   }
 
   public double getSpeed(){
-    SmartDashboard.putNumber("speed gotten?", SmartDashboard.getNumber("intake speed", 0));
+//    SmartDashboard.putNumber("speed gotten?", SmartDashboard.getNumber("intake speed", 0));
+    
     return SmartDashboard.getNumber("intake speed", 0);
   }
   public void setIntakeRoller(double speed){
+    SmartDashboard.putNumber("speed gotten?", 99);
     IntakeRoller.set(ControlMode.PercentOutput, speed);
   }
 }
