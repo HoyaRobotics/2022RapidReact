@@ -47,7 +47,13 @@ public class RobotContainer {
     
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     /*Mct - intake, this is the old way to call it*/
-    runIntakeFwd.whileHeld(new IntakeBall(intake, colorSensor, storage));/*
+    runIntakeFwd.whileHeld(new IntakeBall(intake, colorSensor, storage));
+    
+  
+    /*Mct - intake, this is the old way to call it*/
+    runIntakeFwd.whenReleased(new StopIntake(intake, storage));/*
+    
+    /*
     runIntakeFwd.whileHeld(new InstantCommand(() -> {
       intake.setIntakeRoller(intake.getSpeed(),true);
     }
