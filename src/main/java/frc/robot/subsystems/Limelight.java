@@ -5,15 +5,46 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Limelight extends SubsystemBase {
-  /** Creates a new Limelight. */
-  public Limelight() {
-    System.out.println("Limelight constructor called");
-  }
+  private final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
+  private final NetworkTableEntry pipeline = table.getEntry("pipeline");
+  private final NetworkTableEntry xOffset = table.getEntry("tx");
+  private final NetworkTableEntry yOffset = table.getEntry("ty");
+
+  private int currentPipeline = 0;
+  
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    // This method will be called once per scheduler 
+    table.getEntry("ledmode").setNumber(3);
+  }
+
+  public void toggleZoom(){
+    if(currentPipeline == 0)
+      currentPipeline = 1;
+    else if(currentPipeline == 1)
+      currentPipeline = 0;
+
+      setPipeline(currentPipeline);
+  }
+
+
+  public double getXOffset(){
+    return xOffset.getDouble(0);
+  }
+
+  public double getYOffset(){
+    return yOffset.getDouble(0);
+  }
+
+  public void setPipeline(int id){
+    pipeline.setNumber(id);
   }
 }
