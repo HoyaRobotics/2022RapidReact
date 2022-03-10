@@ -13,11 +13,10 @@ import static frc.robot.Constants.*;
  */
 public class Turret extends SubsystemBase {
 
-    private static final int Turret_Rotator = 0;
-    private final WPI_TalonSRX rotator = new WPI_TalonSRX(Turret_Rotator);
+    private final WPI_TalonSRX rotator = new WPI_TalonSRX(TURRET_ROTATOR);
 
     public Turret(){
-      System.out.println("Shooter constructor called");
+      //System.out.println("Shooter constructor called");
         rotator.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.Analog, 0, 10);
         rotator.setSelectedSensorPosition(0, 0, 10);
     }

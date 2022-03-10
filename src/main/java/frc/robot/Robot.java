@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData(CommandScheduler.getInstance());
     
     SmartDashboard.putNumber("Intake Speed McT",-1);
-
+    SmartDashboard.putNumber("Target Shooter RPM",1000);
   }
 
   /**

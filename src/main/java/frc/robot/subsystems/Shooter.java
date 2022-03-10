@@ -10,10 +10,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import frc.robot.util.Logger;
 
-import static frc.robot.Constants.*;
+import frc.robot.Constants.*;
+import frc.robot.Constants;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -21,11 +24,11 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */
 
-  private final CANSparkMax left = new CANSparkMax(SHOOTER_LEFT, MotorType.kBrushless);
-  private final CANSparkMax right = new CANSparkMax(SHOOTER_RIGHT, MotorType.kBrushless);
+  private final CANSparkMax left = new CANSparkMax(Constants.SHOOTER_LEFT, MotorType.kBrushless);
+  private final CANSparkMax right = new CANSparkMax(Constants.SHOOTER_RIGHT, MotorType.kBrushless);
 
-  private final CANPIDController pid = right.getPIDController();
-  private final CANEncoder encoder = right.getEncoder();
+  private final SparkMaxPIDController pid = right.getPIDController();
+  private final RelativeEncoder encoder = right.getEncoder();
 
   // Variables to keep track of RPM history over last 400ms.
   // Used to determine shooter stability.
@@ -38,7 +41,7 @@ public class Shooter extends SubsystemBase {
   private double rpmOffset;
 
   public Shooter() {
-    System.out.println("Shooter constructor called");
+//    System.out.println("Shooter constructor called");
     left.restoreFactoryDefaults();
     right.restoreFactoryDefaults();
 
@@ -46,8 +49,8 @@ public class Shooter extends SubsystemBase {
     right.setClosedLoopRampRate(1);
 
     pid.setFeedbackDevice(encoder);
-    pid.setFF(SHOOTER_FF);
-    pid.setP(SHOOTER_P);
+    pid.setFF(Constants.SHOOTER_FF);
+    pid.setP(Constants.SHOOTER_P);
         
     left.follow(right, true);
   }
@@ -103,7 +106,7 @@ public class Shooter extends SubsystemBase {
 
         double average = sum / nonZero;
 
-      return (highest - average) < RPM_STABILITY_ERROR && (average - lowest) < RPM_STABILITY_ERROR;
+      return (highest - average) < Constants.RPM_STABILITY_ERROR && (average - lowest) < Constants.RPM_STABILITY_ERROR;
   }
 
   /**
@@ -115,7 +118,7 @@ public class Shooter extends SubsystemBase {
    */
   public void setFlywheelRPM(double rpm){
       targetRPM = rpm;
-      pid.setReference(targetRPM + rpmOffset, ControlType.kVelocity);
+      pid.setReference(targetRPM + rpmOffset, CANSparkMax.ControlType.kVelocity);
   }
 
   public void setFlywheelPercent(double percent){

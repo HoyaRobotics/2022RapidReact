@@ -35,7 +35,13 @@ public class Limelight extends SubsystemBase {
       setPipeline(currentPipeline);
   }
 
-
+/**
+ * Calculate distance to target.  Refer to Limelight docs.
+ */
+  public double getDistanceFromTarget() {
+    return Constants.LL_SHOT_HEIGHT/Math.abs(Math.toRadians(getYOffset()));
+    
+  }
   public double getXOffset(){
     return xOffset.getDouble(0);
   }

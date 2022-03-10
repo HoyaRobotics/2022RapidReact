@@ -75,4 +75,9 @@ public final class Constants {
         public static final double SHOOTER_FF = 0.00019;
         public static final double SHOOTER_P = 0.0003;
         public static final double RPM_STABILITY_ERROR = 25;
+
+        //Limelight
+        public static final double LL_HEIGHT_ABOVE_GROUND = 2.29; //2' 2 1/2"
+        public static final double LL_TARGET_HEIGHT = 8.5;
+        public static final double LL_SHOT_HEIGHT = LL_TARGET_HEIGHT-LL_HEIGHT_ABOVE_GROUND;
     }
