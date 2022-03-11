@@ -49,6 +49,17 @@ public class RobotContainer {
     /*Mct - intake, this is the old way to call it*/
     runIntakeFwd.whileHeld(new IntakeBall(intake, colorSensor, storage));
     
+    //McT check this out
+    @Override
+    public void teleopPeriodic() {
+      if (joy1.getTriggerPressed()) {
+        System.out.println("Setting camera 2");
+        cameraSelection.setString(camera2.getName());
+      } else if (joy1.getTriggerReleased()) { 
+        System.out.println("Settingcamera 1");
+        cameraSelection.setString(camera1.getName());
+      }
+    }
   
     /*Mct - intake, this is the old way to call it*/
     runIntakeFwd.whenReleased(new StopIntake(intake, storage));/*
