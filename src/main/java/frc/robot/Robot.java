@@ -10,6 +10,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.subsystems.DriveBase;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.commands.TimedIntake;
+import frc.robot.commands.Auto2;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,6 +24,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+   
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -35,6 +39,9 @@ public class Robot extends TimedRobot {
     
     SmartDashboard.putNumber("Intake Speed McT",-1);
     SmartDashboard.putNumber("Target Shooter RPM",1000);
+    
+
+
   }
 
   /**
@@ -62,7 +69,7 @@ public class Robot extends TimedRobot {
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   
-  
+
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();

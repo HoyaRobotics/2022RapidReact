@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.commands.TimedIntake;
+import frc.robot.commands.Auto2;
 
 
 /**
@@ -40,12 +43,26 @@ public class RobotContainer {
 
   private final ColorSensor colorSensor = new ColorSensor();
 
+   // A chooser for autonomous commands
+   SendableChooser<Command> m_chooser= new SendableChooser<>();
+   DriveForTime driveForTime = new DriveForTime(driveBase, 0.5, 2);
+   Auto2 auto2;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
     driveBase.setDefaultCommand(new DriveWithJoystick(driveBase, () -> driver.getLeftY(), () -> driver.getLeftX()));
     // Configure the button bindings
     configureButtonBindings();
+
+    auto2= new Auto2(driveBase,  intake,  storage);
+
+    // Add commands to the autonomous command chooser
+m_chooser.setDefaultOption("Auto1 - Taxi", driveForTime);
+m_chooser.addOption("Auto2", auto2);
+
+// Put the chooser on the dashboard
+SmartDashboard.putData(m_chooser);
 
     
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
@@ -116,9 +133,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new SequentialCommandGroup(
-      new DriveForTime(driveBase, 0.6, 4),
-      new DriveForDistance(driveBase, 0.6, 15)
-    );
+    return m_chooser.getSelected();
   }
 }
