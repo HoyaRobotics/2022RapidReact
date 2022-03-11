@@ -5,11 +5,28 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
+import frc.robot.subsystems.Turret;
+/**
+ * This command allows the turret to spin at a certain
+ * speed for a certain time.
+ * 
+ * This is only used in autonomous.
+ */
 public class TurnTurretForTime extends CommandBase {
+  private final Turret turret;
+    private final double speed;
+
+    private int counter = 0;
+    private int target = 0;
   /** Creates a new TurnTurretForTime. */
-  public TurnTurretForTime() {
+  public TurnTurretForTime(Turret turret, double speed, double seconds) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.turret = turret;
+        this.speed = speed;
+
+        target = (int)(seconds * 50);
+
+        addRequirements(turret);
   }
 
   // Called when the command is initially scheduled.
@@ -18,15 +35,18 @@ public class TurnTurretForTime extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {if(counter < target)
+    counter++;
+
+turret.setRotatorSpeed(speed);}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {turret.setRotatorSpeed(0);}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return counter >= target;
   }
 }
