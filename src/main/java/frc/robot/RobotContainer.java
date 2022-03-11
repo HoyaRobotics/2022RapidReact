@@ -59,7 +59,7 @@ public class RobotContainer {
 
     // Add commands to the autonomous command chooser
 m_chooser.setDefaultOption("Auto1 - Taxi", driveForTime);
-m_chooser.addOption("Auto2", auto2);
+//m_chooser.addOption("Auto2", auto2);
 
 // Put the chooser on the dashboard
 SmartDashboard.putData(m_chooser);
