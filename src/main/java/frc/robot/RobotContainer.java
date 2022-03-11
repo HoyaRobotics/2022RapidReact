@@ -32,6 +32,9 @@ public class RobotContainer {
   private final Turret turret = new Turret();
   private final Intakev2 intake = new Intakev2();
   private final Storage storage = new Storage();
+  private final IntakeCamera intakeCamera = new IntakeCamera();
+  private final Limelight limelight = new Limelight();
+  
   //private final Intakev2 intakev2 = new Intakev2();
 
 
@@ -48,9 +51,12 @@ public class RobotContainer {
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     /*Mct - intake, this is the old way to call it*/
     runIntakeFwd.whileHeld(new IntakeBall(intake, colorSensor, storage));
-    
+
+    JoystickButton changeCameraViewBtn = new JoystickButton(driver, Controls.TOGGLE_CAMERA_VIEW);
+    changeCameraViewBtn.whenPressed(new ChangeCameraView());
     //McT check this out
-    @Override
+    //checked - moved to ChangeCameraView
+    /*@Override
     public void teleopPeriodic() {
       if (joy1.getTriggerPressed()) {
         System.out.println("Setting camera 2");
@@ -60,7 +66,7 @@ public class RobotContainer {
         cameraSelection.setString(camera1.getName());
       }
     }
-  
+ */ 
     /*Mct - intake, this is the old way to call it*/
     runIntakeFwd.whenReleased(new StopIntake(intake, storage));/*
     
