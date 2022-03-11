@@ -3,40 +3,55 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-/*
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Intakev2;
+import frc.robot.subsystems.Storage;
 
+/**
+ * This command runs the intake at a certain speed
+ * for a certain time.
+ * 
+ * There is also a distinction made between the intake 
+ * and storage.
+ * The intake is the rollers outside the frame.
+ * Storage control the cargo in the robot.
+ * 
+ * This is used for automatic ball control during shooting,
+ * in teleop and autonomous.
+ */
 public class TimedIntake extends CommandBase {
 
   public enum IntakeMode {
-    INTERNAL, EXTERNAL, BOTH
+    INTAKE, STORAGE, BOTH
 }
 
-  private final Intake intake;
+  private final Intakev2 intake;
+  private final Storage storage;
   private final double speed;
   private final IntakeMode mode;
   private final int calls;
 
   private int callCounter = 0;
 
-  public TimedIntake(Intake intake, double speed, double seconds, IntakeMode mode) {
+  public TimedIntake(Intakev2 intake, Storage storage, double speed, double seconds, IntakeMode mode) {
     this.intake = intake;
+    this.storage = storage;
     this.speed = speed;
     this.mode = mode;
 
     calls = (int)(seconds * 50);
+    addRequirements(this.intake);
+    addRequirements(this.storage);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(mode == IntakeMode.INTERNAL || mode == IntakeMode.BOTH)
-        intake.setInternalRoller(speed);
-    if(mode == IntakeMode.EXTERNAL || mode == IntakeMode.BOTH)
-        intake.setExternalRoller(speed);
+    if(mode == IntakeMode.INTAKE || mode == IntakeMode.BOTH)
+        intake.setIntakeRoller(speed);
+    if(mode == IntakeMode.STORAGE || mode == IntakeMode.BOTH)
+        storage.setIndexerRoller(speed);
 
     callCounter = 1;
   }
@@ -50,8 +65,8 @@ public class TimedIntake extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.setInternalRoller(0);
-    intake.setExternalRoller(0);
+    intake.setIntakeRoller(0);
+    storage.setIndexerRoller(0);
   }
 
   // Returns true when the command should end.
@@ -60,4 +75,3 @@ public class TimedIntake extends CommandBase {
     return callCounter >= calls;
   }
 }
-*/
