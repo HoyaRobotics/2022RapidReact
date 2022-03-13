@@ -33,8 +33,10 @@ public class AlignTurret extends CommandBase {
 
   @Override
   public void initialize() {
-    Logger.info("Beginning turret alignment");
+    //Logger.info("Beginning turret alignment");
   }
+
+
 
   @Override
   public void execute() {
