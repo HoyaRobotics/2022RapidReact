@@ -47,8 +47,8 @@ public final class Constants {
         //public static final int INTAKE_EXTERNAL_ROLLER = 7;
         public static final int SHOOTER_LEFT = 11;
         public static final int SHOOTER_RIGHT = 12;
-        public static final int CLIMBER_VERTICAL_1 = 31;
-        public static final int CLIMBER_VERTICAL_2 = 32;
+        public static final int CLIMBER_VERTICAL_L = 31;
+        public static final int CLIMBER_VERTICAL_R = 32;
         //public static final int CLIMBER_HORIZONTAL = 12;
 
         // PCM ids
@@ -56,6 +56,8 @@ public final class Constants {
         //old public static final int CLIMBER_LOCK = 0;
         //old public static final int SHIFTER = 1;
         public static final int INTAKE_RAISER = 8;
+        public static final int CLIMBER_LEFT_PCM = 10;
+        public static final int CLIMBER_RIGHT_PCM = 12;
         //old public static final int BALL_GATE = 4;
 
     
