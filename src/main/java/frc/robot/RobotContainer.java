@@ -50,7 +50,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-
+    storage.setDefaultCommand(new ControlStorage(storage, () -> driver.getPOV()));
     driveBase.setDefaultCommand(new DriveWithJoystick(driveBase, () -> driver.getLeftY(), () -> driver.getLeftX()));
     // Configure the button bindings
     configureButtonBindings();
