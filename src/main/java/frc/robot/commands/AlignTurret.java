@@ -11,10 +11,10 @@ import frc.robot.subsystems.Limelight;
 
 public class AlignTurret extends CommandBase {
   private final Turret turret;
-  private final Limelight limielight;
+  private final Limelight limelight;
 
   private boolean useTDM = false;
-  private int tdmCount = 0
+  private int tdmCount = 0;
   private int tdmThreshold = 100;
 
 
@@ -28,11 +28,13 @@ public class AlignTurret extends CommandBase {
     this.useTDM = useTDM;
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    //Logger.info("Beginning turret alignment");
+  }
 
-  // Called every time the scheduler runs while the command is scheduled.
+
+
   @Override
   public void execute() {
     double speed = (limelight.getXOffset() + 2) * TURRET_P;
@@ -47,16 +49,19 @@ public class AlignTurret extends CommandBase {
     tdmCount++;
   }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if(useTDM && tdmCount >= tdmThreshold){
+      //Logger.warn("Turret disaster mitigation triggered");
+      return true;
+    }
+
+    return Math.abs((limelight.getXOffset() + 2)) < TURRET_SENSITIVITY_DEGREES;
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    turret.setRotatorSpeed(0);
+    //Logger.info("Finished turret alignment");
   }
 }
-
-
-//Evin was here
