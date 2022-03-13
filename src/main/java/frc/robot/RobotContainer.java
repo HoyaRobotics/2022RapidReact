@@ -42,6 +42,8 @@ public class RobotContainer {
 
    // A chooser for autonomous commands
    SendableChooser<Command> m_chooser= new SendableChooser<>();
+   SendableChooser<Command> HowToGetRPM = new SendableChooser<>();
+
    DriveForTime driveForTime = new DriveForTime(driveBase, 0.5, 2);
    Auto2 auto2;
 
@@ -59,10 +61,12 @@ public class RobotContainer {
 m_chooser.setDefaultOption("Auto1 - Taxi", driveForTime);
 //m_chooser.addOption("Auto2", auto2);
 
+HowToGetRPM.setDefaultOption("From Dashboard", object);
 // Put the chooser on the dashboard
 SmartDashboard.putData(m_chooser);
 
-    
+    JoystickButton runIntakeBkd = new JoystickButton(driver, Controls.RUN_INTAKE_RVS);
+    runIntakeBkd.whileHeld(new PoopBall(intake));
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
     /*Mct - intake, this is the old way to call it*/
     runIntakeFwd.whileHeld(new IntakeBall(intake, colorSensor, storage));
