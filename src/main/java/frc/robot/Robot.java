@@ -24,7 +24,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-   
+  
+  UsbCamera camera1;
+  NetworkTableEntry cameraSelection;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -37,13 +39,26 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     //SmartDashboard.putData(CommandScheduler.getInstance());
     
+    camera1 = CameraServer.startAutomaticCapture(0);
+    
+    cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
+    
     SmartDashboard.putNumber("Intake Speed McT",-1);
     SmartDashboard.putNumber("Target Shooter RPM",1000);
     
 
 
   }
-
+   
+  @Override
+  public void teleopPeriodic() {
+    if (TOGGLE_CAMERA_VIEW.whilePressed()) {
+      System.out.println("Setting intake camera");
+      cameraSelection.setString(camera1.getName());
+    } else if (TOGGLE_CAMERA_VIEW.whileReleased()) {
+      System.out.println("Setting limelight camera");
+      cameraSelection.setString("limelight");
+  }
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.

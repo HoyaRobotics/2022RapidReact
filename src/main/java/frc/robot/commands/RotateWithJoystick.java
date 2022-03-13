@@ -10,7 +10,8 @@ import java.util.function.DoubleSupplier;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
-import frc.robot.util.Utils;
+import frc.robot.utils.utils;
+import frc.robot.utils.Logger;
 
 public class RotateWithJoystick extends CommandBase {
 
@@ -31,7 +32,7 @@ public class RotateWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-      double speed = Utils.applyDeadband(input.getAsDouble(), Constants.CONTROL_DEADBAND) / 2;
+      double speed = utils.applydeadband(input.getAsDouble(), Constants.CONTROL_DEADBAND) / 2;
       //                                                                                    ^
       //                                  divide by two to allow for much finer turret control
       turret.setRotatorSpeed(speed);
