@@ -51,7 +51,8 @@ public class Shooter extends SubsystemBase {
     pid.setFeedbackDevice(encoder);
     pid.setFF(Constants.SHOOTER_FF);
     pid.setP(Constants.SHOOTER_P);
-        
+    
+    right.setInverted(true);        
     left.follow(right, true);
   }
 
@@ -123,6 +124,10 @@ public class Shooter extends SubsystemBase {
 
   public void setFlywheelPercent(double percent){
       right.set(percent);
+  }
+
+  public void stopMotors(){
+      right.set(0);
   }
 
   public double getFlywheelRPM(){
