@@ -55,7 +55,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    auto2= new Auto2(driveBase,  intake,  storage);
+//    auto2= new Auto2(driveBase,  intake,  storage);
 
     // Add commands to the autonomous command chooser
 m_chooser.setDefaultOption("Auto1 - Taxi", driveForTime);

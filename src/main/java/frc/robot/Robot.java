@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    SmartDashboard.putData(CommandScheduler.getInstance());
+    //SmartDashboard.putData(CommandScheduler.getInstance());
     
     SmartDashboard.putNumber("Intake Speed McT",-1);
     SmartDashboard.putNumber("Target Shooter RPM",1000);
