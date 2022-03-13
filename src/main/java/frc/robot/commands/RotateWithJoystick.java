@@ -34,7 +34,7 @@ public class RotateWithJoystick extends CommandBase {
       double speed = Utils.applyDeadband(input.getAsDouble(), Constants.CONTROL_DEADBAND) / 2;
       //                                                                                    ^
       //                                  divide by two to allow for much finer turret control
-      turret.setRotatorSpeed(speed)
+      turret.setRotatorSpeed(speed);
   }
 
   // Called once the command ends or is interrupted.

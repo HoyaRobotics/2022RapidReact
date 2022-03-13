@@ -7,10 +7,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Limelight;
-//import frc.robot.util.Logger;
+import frc.robot.utils.Logger;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/*
+
 public class ShooterRev extends CommandBase {
 
   private final Shooter shooter;
@@ -37,7 +37,7 @@ public class ShooterRev extends CommandBase {
 
       shooter.setFlywheelRPM(targetRPM);
 
-      //Logger.info("Started revving shooter to " + targetRPM + "RPM");
+      Logger.info("Started revving shooter to " + targetRPM + "RPM");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,7 +47,7 @@ public class ShooterRev extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //Logger.info("Finished revving shooter");
+    Logger.info("Finished revving shooter");
   }
 
   // Returns true when the command should end.
@@ -56,4 +56,3 @@ public class ShooterRev extends CommandBase {
     return shooter.isStable();
   }
 }
-*/
