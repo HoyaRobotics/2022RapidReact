@@ -11,12 +11,13 @@ import frc.robot.commands.TimedIntake.IntakeMode;
 import frc.robot.subsystems.Intakev2;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.Storage;
 import frc.robot.utils.Logger;
 import frc.robot.subsystems.Limelight;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ShootBall extends SequentialCommandGroup {
-  public ShootBall(Shooter shooter, Intakev2 intake, Turret turret, Limelight limelight) {
+  public ShootBall(Shooter shooter,  Intakev2 intake, Storage storage, Turret turret, Limelight limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     addCommands(
