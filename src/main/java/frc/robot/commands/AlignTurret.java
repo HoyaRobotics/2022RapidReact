@@ -51,12 +51,19 @@ public class AlignTurret extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+        turret.setRotatorSpeed(0);
+        Logger.info("Finished turret alignment");
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+     if(useTDM && tdmCount >= tdmThreshold){
+         Logger.warn("Turret disaster mitigation triggered");
+         return true;
+     }
+     return Math.abs((limelight.getXOffset() + 2)) < TURRET_SENSITIVITY_DEGREES;
   }
 }
 
