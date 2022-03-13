@@ -11,10 +11,10 @@ import frc.robot.subsystems.Limelight;
 
 public class AlignTurret extends CommandBase {
   private final Turret turret;
-  private final Limelight limielight;
+  private final Limelight limelight;
 
   private boolean useTDM = false;
-  private int tdmCount = 0
+  private int tdmCount = 0;
   private int tdmThreshold = 100;
 
 
