@@ -5,7 +5,6 @@ import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.DriveWithJoystick;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -16,8 +15,6 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.commands.TimedIntake;
-import frc.robot.commands.Auto2;
 
 
 /**
@@ -52,6 +49,7 @@ public class RobotContainer {
   public RobotContainer() {
     storage.setDefaultCommand(new ControlStorage(storage, () -> driver.getPOV()));
     driveBase.setDefaultCommand(new DriveWithJoystick(driveBase, () -> driver.getLeftY(), () -> driver.getLeftX()));
+    turret.setDefaultCommand(new RotateWithJoystick(turret, () -> driver.getRightX()));
     // Configure the button bindings
     configureButtonBindings();
 

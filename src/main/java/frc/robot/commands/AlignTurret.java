@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import static frc.robot.Constants.*;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Limelight;
+import frc.robot.utils.*;
 
 public class AlignTurret extends CommandBase {
   private final Turret turret;
@@ -32,15 +33,8 @@ public class AlignTurret extends CommandBase {
 
   @Override
   public void initialize() {
-<<<<<<< HEAD
-    //Logger.info("Beginning turret alignment");
-  }
-
-
-=======
     Logger.info("Beginning turret alignment");
   }
->>>>>>> dca69fe6f6fa245e55fff4d37bd24e2d98e4f497
 
   @Override
   public void execute() {
