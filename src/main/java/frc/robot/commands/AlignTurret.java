@@ -26,6 +26,8 @@ public class AlignTurret extends CommandBase {
     this.turret = turret;
     this.limelight = limelight;
     this.useTDM = useTDM;
+    
+    addRequirements(turret, limelight);
   }
 
   // Called when the command is initially scheduled.
