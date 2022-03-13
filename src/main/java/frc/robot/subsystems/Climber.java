@@ -10,6 +10,8 @@ import frc.robot.Constants.*;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */

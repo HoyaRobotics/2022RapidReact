@@ -5,11 +5,27 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import static frc.robot.Constants.*;
+import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.Limelight;
 
 public class AlignTurret extends CommandBase {
-  /** Creates a new AlignTurret. */
-  public AlignTurret() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  private final Turret turret;
+  private final Limelight limielight;
+
+  private boolean useTDM = false;
+  private int tdmCount = 0
+  private int tdmThreshold = 100;
+
+
+  public AlignTurret(Turret turret, Limelight limelight) {
+    this(turret, limelight, false);
+  }
+
+  public AlignTurret(Turret turret, Limelight limelight, boolean useTDM){
+    this.turret = turret;
+    this.limelight = limelight;
+    this.useTDM = useTDM;
   }
 
   // Called when the command is initially scheduled.
@@ -18,7 +34,18 @@ public class AlignTurret extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    double speed = (limelight.getXOffset() + 2) * TURRET_P;
+
+    if(speed > 0.1)
+      speed = 0.1;
+    else if(speed < 0.1)
+      speed = -0.1;
+
+    turret.setRotatorSpeed(speed);
+
+    tdmCount++;
+  }
 
   // Called once the command ends or is interrupted.
   @Override
