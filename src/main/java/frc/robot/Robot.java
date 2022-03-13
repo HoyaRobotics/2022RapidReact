@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -50,15 +54,7 @@ public class Robot extends TimedRobot {
 
   }
    
-  @Override
-  public void teleopPeriodic() {
-    if (TOGGLE_CAMERA_VIEW.whilePressed()) {
-      System.out.println("Setting intake camera");
-      cameraSelection.setString(camera1.getName());
-    } else if (TOGGLE_CAMERA_VIEW.whileReleased()) {
-      System.out.println("Setting limelight camera");
-      cameraSelection.setString("limelight");
-  }
+  
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
@@ -113,7 +109,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    
+  }
 
   @Override
   public void testInit() {

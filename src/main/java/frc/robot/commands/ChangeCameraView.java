@@ -5,11 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class ChangeCameraView extends CommandBase {
   NetworkTableEntry cameraSelection;
+  UsbCamera camera1;
+
   /** Creates a new ChangeCameraView. */
   public ChangeCameraView() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -19,8 +22,10 @@ public class ChangeCameraView extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+
     if(cameraSelection.getString("limelight")=="limelight"){
-      cameraSelection.setString("intakeCamera");
+      cameraSelection.setString(camera1.getName());
     }else{
       cameraSelection.setString("limelight");
     }

@@ -70,7 +70,6 @@ SmartDashboard.putData(m_chooser);
     JoystickButton changeCameraViewBtn = new JoystickButton(driver, Controls.TOGGLE_CAMERA_VIEW);
     changeCameraViewBtn.whenPressed(new ChangeCameraView());
 
-    
     //McT check this out
     //checked - moved to ChangeCameraView
     /*@Override
