@@ -26,14 +26,21 @@ public class AlignTurret extends CommandBase {
     this.turret = turret;
     this.limelight = limelight;
     this.useTDM = useTDM;
+    
+    addRequirements(turret, limelight);
   }
 
   @Override
   public void initialize() {
+<<<<<<< HEAD
     //Logger.info("Beginning turret alignment");
   }
 
 
+=======
+    Logger.info("Beginning turret alignment");
+  }
+>>>>>>> dca69fe6f6fa245e55fff4d37bd24e2d98e4f497
 
   @Override
   public void execute() {

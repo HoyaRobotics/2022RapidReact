@@ -34,9 +34,9 @@ public class ControlStorage extends CommandBase {
     int command = (int) commander.getAsDouble();
 
     if(command == 0)
-      storage.setIndexerRoller(0.5);
-    else if(command == 100)
       storage.setIndexerRoller(-0.5);
+    else if(command == 180)
+      storage.setIndexerRoller(0.5);
     else
       storage.setIndexerRoller(0);
   }
