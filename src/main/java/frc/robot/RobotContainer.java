@@ -111,11 +111,8 @@ SmartDashboard.putData(m_chooser);
     ));*/
 
     JoystickButton toggleIntakeRaised = new JoystickButton(driver, Controls.TOGGLE_INTAKE_RAISED);
-    toggleIntakeRaised.whileHeld(new InstantCommand(() -> {intake.toggleRaised();}));
+    toggleIntakeRaised.whenPressed(new InstantCommand(() -> {intake.toggleRaised();}));
 //end old intake*/
-    //GenericHID d_pad = new GenericHID(driver, Controls.RUN_INDEXER_FWD);
-
-    //SmartDashboard.putNumber("D-Pad value", d_pad.getRawAxis(0))
   }
 
   /**
