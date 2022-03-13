@@ -16,19 +16,19 @@ public class ChangeCameraView extends CommandBase {
   /** Creates a new ChangeCameraView. */
   public ChangeCameraView() {
     // Use addRequirements() here to declare subsystem dependencies.
-    cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
+    //cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
 
-
-    if(cameraSelection.getString("limelight")=="limelight"){
+    System.out.println("Camera change code to run");
+/*    if(cameraSelection.getString("limelight")=="limelight"){
       cameraSelection.setString(camera1.getName());
     }else{
       cameraSelection.setString("limelight");
-    }
+    }*/
   }
 
   // Called every time the scheduler runs while the command is scheduled.
