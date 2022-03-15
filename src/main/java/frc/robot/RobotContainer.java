@@ -32,6 +32,7 @@ public class RobotContainer {
   private final Turret turret = new Turret();
   private final Intakev2 intake = new Intakev2();
   private final Storage storage = new Storage();
+  private final Shooter shooter = new Shooter();
   private final IntakeCamera intakeCamera = new IntakeCamera();
   private final Limelight limelight = new Limelight();
   
@@ -43,7 +44,7 @@ public class RobotContainer {
    // A chooser for autonomous commands
    SendableChooser<Command> m_chooser= new SendableChooser<>();
    SendableChooser<Command> HowToGetRPM = new SendableChooser<>();
-
+   ShootBallManually shootBallManually = new ShootBallManually(intake, storage, shooter);
    DriveForTime driveForTime = new DriveForTime(driveBase, 0.5, 2);
    Auto2 auto2;
 
@@ -61,9 +62,10 @@ public class RobotContainer {
 m_chooser.setDefaultOption("Auto1 - Taxi", driveForTime);
 //m_chooser.addOption("Auto2", auto2);
 
-HowToGetRPM.setDefaultOption("From Dashboard", object);
+HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);
 // Put the chooser on the dashboard
 SmartDashboard.putData(m_chooser);
+SmartDashboard.putData(HowToGetRPM);
 
     JoystickButton runIntakeBkd = new JoystickButton(driver, Controls.RUN_INTAKE_RVS);
     runIntakeBkd.whileHeld(new PoopBall(intake));
@@ -74,6 +76,9 @@ SmartDashboard.putData(m_chooser);
     JoystickButton changeCameraViewBtn = new JoystickButton(driver, Controls.TOGGLE_CAMERA_VIEW);
     changeCameraViewBtn.whenPressed(new ChangeCameraView());
 
+    JoystickButton shootBallBtn = new JoystickButton(driver, Controls.SHOOT_BALL);
+    shootBallBtn.whenPressed(HowToGetRPM.getSelected());
+    shootBallBtn.whenReleased(new StopShooter(shooter));
     //McT check this out
     //checked - moved to ChangeCameraView
     /*@Override
