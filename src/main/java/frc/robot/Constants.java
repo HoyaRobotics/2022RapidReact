@@ -27,7 +27,8 @@ public final class Constants {
              public static final int TOGGLE_LIMELIGHT_ZOOM = Button.kB.value;
              public static final int INC_RPM_OFFSET = Button.kRightBumper.value;
              public static final int DEC_RPM_OFFSET = Button.kLeftBumper.value;
-             public static final int CHANGE_TARGET_GOAL= Button.kY.value;            
+             public static final int CHANGE_TARGET_GOAL= Button.kY.value;  
+             public static final int RELEASE_CLIMBER = Button.kX.value;          
         }
         
         //USB ids

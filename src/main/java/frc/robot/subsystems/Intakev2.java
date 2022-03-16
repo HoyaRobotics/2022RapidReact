@@ -28,7 +28,9 @@ public class Intakev2 extends SubsystemBase {
   private boolean raised = true;//flag to ensure intake starts raised.
 
   /** Creates a new Intakev2. */
-  public Intakev2() {}
+  public Intakev2() {
+    //add code to current limit
+  }
 
   @Override
   public void periodic() {

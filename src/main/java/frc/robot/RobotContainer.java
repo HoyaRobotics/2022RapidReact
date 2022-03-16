@@ -1,11 +1,12 @@
 package frc.robot;
 
 import static frc.robot.Constants.*;
-import frc.robot.commands.*;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -27,6 +28,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   private final XboxController driver = new XboxController(DRIVER);
+  private final XboxController operator = new XboxController(OPERATOR);
 
   private final DriveBase driveBase = new DriveBase();
   private final Turret turret = new Turret();
@@ -35,6 +37,7 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final IntakeCamera intakeCamera = new IntakeCamera();
   private final Limelight limelight = new Limelight();
+  private final Climber climber = new Climber();
   
   //private final Intakev2 intakev2 = new Intakev2();
 
@@ -66,6 +69,9 @@ HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);
 // Put the chooser on the dashboard
 SmartDashboard.putData(m_chooser);
 SmartDashboard.putData(HowToGetRPM);
+
+    JoystickButton releaseClimberBtn = new JoystickButton(operator, Controls.RELEASE_CLIMBER);
+    releaseClimberBtn.whileHeld(new ReleaseClimber(climber));
 
     JoystickButton runIntakeBkd = new JoystickButton(driver, Controls.RUN_INTAKE_RVS);
     runIntakeBkd.whileHeld(new PoopBall(intake));

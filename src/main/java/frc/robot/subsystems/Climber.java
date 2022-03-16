@@ -23,6 +23,9 @@ public class Climber extends SubsystemBase {
   public Climber() {
     this.LeftMotor = new CANSparkMax(Constants.CLIMBER_VERTICAL_L, MotorType.kBrushless);
     this.RightMotor = new CANSparkMax(Constants.CLIMBER_VERTICAL_R, MotorType.kBrushless);
+    
+    this.LeftMotor.setSmartCurrentLimit(35);
+    this.RightMotor.setSmartCurrentLimit(35);
   }
 
   @Override
@@ -32,9 +35,10 @@ public class Climber extends SubsystemBase {
   
   public void setClimberMotor(double speed){
     
-    this.LeftMotor.set(speed);
+    this.LeftMotor.set(-speed);
     this.RightMotor.set(speed);
   }
+  
   /*Used to angle the arms*/
   public void setAngled(boolean angled){
     if(this.angled != angled)
