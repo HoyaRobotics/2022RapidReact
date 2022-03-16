@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
+import frc.autos.MultiBallAuto;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -38,7 +39,7 @@ public class RobotContainer {
   private final IntakeCamera intakeCamera = new IntakeCamera();
   private final Limelight limelight = new Limelight();
   private final Climber climber = new Climber();
-  
+  private final MultiBallAuto multiBallAuto = new MultiBallAuto( intake,  storage,  shooter,  driveBase);
   //private final Intakev2 intakev2 = new Intakev2();
 
 
@@ -50,6 +51,7 @@ public class RobotContainer {
    ShootBallManually shootBallManually = new ShootBallManually(intake, storage, shooter);
    DriveForTime driveForTime = new DriveForTime(driveBase, 0.5, 2);
    Auto2 auto2;
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -63,6 +65,7 @@ public class RobotContainer {
 
     // Add commands to the autonomous command chooser
 m_chooser.setDefaultOption("Auto1 - Taxi", driveForTime);
+m_chooser.addOption("Multi auto", multiBallAuto);
 //m_chooser.addOption("Auto2", auto2);
 
 HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);

@@ -24,8 +24,8 @@ public class Climber extends SubsystemBase {
     this.LeftMotor = new CANSparkMax(Constants.CLIMBER_VERTICAL_L, MotorType.kBrushless);
     this.RightMotor = new CANSparkMax(Constants.CLIMBER_VERTICAL_R, MotorType.kBrushless);
     
-    this.LeftMotor.setSmartCurrentLimit(35);
-    this.RightMotor.setSmartCurrentLimit(35);
+//    this.LeftMotor.setSmartCurrentLimit(35);
+ //   this.RightMotor.setSmartCurrentLimit(35);
   }
 
   @Override

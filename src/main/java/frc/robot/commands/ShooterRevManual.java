@@ -11,17 +11,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterRevManual extends CommandBase {
 
   private final Shooter shooter;
+  private final int RPMTarget;
 
   public ShooterRevManual(Shooter shooter){
     this.shooter = shooter;
+    this.RPMTarget =-1;
 
     addRequirements(shooter);
+}
+public ShooterRevManual(Shooter shooter, int rpmTarget){
+  this.shooter = shooter;
+  this.RPMTarget = rpmTarget;
 }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    double rpm = SmartDashboard.getNumber("Target Shooter RPM",1000);
+    
+    double rpm;
+    if(this.RPMTarget == -1){
+    rpm = SmartDashboard.getNumber("Target Shooter RPM",1000);
+    }else{
+      rpm = this.RPMTarget;
+    }
       shooter.setFlywheelRPM(rpm);
 
       Logger.info("Started revving shooter to " + rpm + "RPM");
