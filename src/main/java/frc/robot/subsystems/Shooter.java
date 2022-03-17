@@ -86,7 +86,7 @@ public class Shooter extends SubsystemBase {
   public boolean isStable(){
       double highest = Double.MIN_VALUE;
       double lowest = Double.MAX_VALUE;
-
+      double rpmStabilityError = Constants.RPM_STABILITY_ERROR;
       double sum = 0;
       double nonZero = 0;
         for (int i = 0; i < rpmLog.length; i++){
@@ -105,8 +105,8 @@ public class Shooter extends SubsystemBase {
         if(nonZero < 10)
             return false;
 
-        double average = sum / nonZero;
-
+        double average = sum / nonZero; 
+    
       return (highest - average) < Constants.RPM_STABILITY_ERROR && (average - lowest) < Constants.RPM_STABILITY_ERROR;
   }
 

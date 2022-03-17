@@ -39,11 +39,12 @@ public class RobotContainer {
   private final IntakeCamera intakeCamera = new IntakeCamera();
   private final Limelight limelight = new Limelight();
   private final Climber climber = new Climber();
-  private final MultiBallAuto multiBallAuto = new MultiBallAuto( intake,  storage,  shooter,  driveBase);
+  private final ColorSensor colorSensor = new ColorSensor();
+  private final MultiBallAuto multiBallAuto = new MultiBallAuto( intake,  storage,  shooter,  driveBase, colorSensor);
   //private final Intakev2 intakev2 = new Intakev2();
 
 
-  private final ColorSensor colorSensor = new ColorSensor();
+  
 
    // A chooser for autonomous commands
    SendableChooser<Command> m_chooser= new SendableChooser<>();
