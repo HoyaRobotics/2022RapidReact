@@ -77,6 +77,9 @@ SmartDashboard.putData(HowToGetRPM);
     JoystickButton releaseClimberBtn = new JoystickButton(operator, Controls.RELEASE_CLIMBER);
     releaseClimberBtn.whileHeld(new ReleaseClimber(climber));
 
+    JoystickButton climbToNextRungBtn = new JoystickButton(operator, Controls.CLIMB_TO_NEXT_RUNG);
+    climbToNextRungBtn.whenPressed(new ClimbToNextRung(climber));
+
     JoystickButton runIntakeBkd = new JoystickButton(driver, Controls.RUN_INTAKE_RVS);
     runIntakeBkd.whileHeld(new PoopBall(intake));
     JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
@@ -103,7 +106,9 @@ SmartDashboard.putData(HowToGetRPM);
     }
  */ 
     /*Mct - intake, this is the old way to call it*/
-    runIntakeFwd.whenReleased(new StopIntake(intake, storage));/*
+    runIntakeFwd.whenReleased(new StopIntake(intake, storage));
+    runIntakeBkd.whenReleased(new StopIntake(intake, storage));
+    /*
     
     /*
     runIntakeFwd.whileHeld(new InstantCommand(() -> {
