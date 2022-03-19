@@ -28,7 +28,8 @@ public class Intake extends SubsystemBase {
   private boolean raised = false;
 
   public Intake() {
-    
+    IntakeRoller.configOpenloopRamp(0.50);
+    IntakeRoller.configContinuousCurrentLimit(25);    
   }
 
   public void setRaised(boolean raised){
