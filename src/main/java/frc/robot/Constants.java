@@ -59,7 +59,7 @@ public final class Constants {
         //old public static final int SHIFTER = 1;
         public static final int INTAKE_RAISER = 8;
         public static final int CLIMBER_LEFT_PCM = 10;
-        public static final int CLIMBER_RIGHT_PCM = 12;
+        public static final int CLIMBER_RIGHT_PCM = 14;
         //old public static final int BALL_GATE = 4;
 
     
