@@ -30,10 +30,11 @@ public class Intakev2 extends SubsystemBase {
   /** Creates a new Intakev2. */
   public Intakev2() {
     //add code to current limit
-    IntakeRoller.configPeakCurrentLimit(35,10);
+    IntakeRoller.configPeakCurrentLimit(30,10);
     IntakeRoller.configPeakCurrentDuration(200, 10);
-    IntakeRoller.configContinuousCurrentLimit(30,10);
-
+    
+    IntakeRoller.configOpenloopRamp(0.50);
+    IntakeRoller.configContinuousCurrentLimit(25);
 
   }
 
