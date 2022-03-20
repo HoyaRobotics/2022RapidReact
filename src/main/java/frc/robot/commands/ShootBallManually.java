@@ -14,11 +14,12 @@ import frc.robot.commands.TimedIntake.IntakeMode;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ShootBallManually extends SequentialCommandGroup {
   /** Creates a new ShootBallManually. */
-  public ShootBallManually(Intakev2 intake, Storage storage, Shooter shooter) {
+  public ShootBallManually(Intakev2 intake, Storage storage, Shooter shooter, Limelight limelight) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ShooterRevManual(shooter),
+      /*new ShooterRevManual(shooter),*/
+      new ShooterRev(shooter, limelight),
       new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.STORAGE)
       /*new ShooterRevManual(shooter),
       new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.STORAGE)*/

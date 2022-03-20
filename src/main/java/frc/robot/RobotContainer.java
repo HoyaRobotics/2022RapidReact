@@ -49,7 +49,7 @@ public class RobotContainer {
    // A chooser for autonomous commands
    SendableChooser<Command> m_chooser= new SendableChooser<>();
    SendableChooser<Command> HowToGetRPM = new SendableChooser<>();
-   ShootBallManually shootBallManually = new ShootBallManually(intake, storage, shooter);
+   ShootBallManually shootBallManually = new ShootBallManually(intake, storage, shooter, limelight);
    DriveForTime driveForTime = new DriveForTime(driveBase, 0.5, 2);
    Auto2 auto2;
 

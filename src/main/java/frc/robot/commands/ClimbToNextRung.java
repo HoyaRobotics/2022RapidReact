@@ -17,9 +17,9 @@ public class ClimbToNextRung extends CommandBase {
   public ClimbToNextRung(Climber climber) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.climber = climber;
-    target = (int)(40);
-    targetAngle = 20;
-    targetFinish = 50;
+    target = (int)(50);
+    targetAngle = 35;
+    targetFinish = 80;
     addRequirements(this.climber);
   }
 
@@ -32,16 +32,19 @@ public class ClimbToNextRung extends CommandBase {
   public void execute() {
     //extend motor for time
     if(counter < target)
-      this.climber.setClimberMotor(0.15);
+      this.climber.setClimberMotor(0.35);
     //release solenoid
     if(counter == target)
       this.climber.setAngled(false);
     //stop motor so it extends fully for time
     if(counter >=(target+targetAngle))
-      this.climber.setClimberMotor(0);
+      this.climber.setClimberMotor(-0.35);
     //set solenoid
-      if(counter >=(target+targetAngle+targetFinish-1))
+      if(counter >=(target+targetAngle+targetFinish-1)){
       this.climber.setAngled(true);
+      this.climber.setClimberMotor(0);
+      }
+   
     
     
     counter++;
@@ -49,7 +52,9 @@ public class ClimbToNextRung extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    counter = 0;
+  }
 
   // Returns true when the command should end.
   @Override
