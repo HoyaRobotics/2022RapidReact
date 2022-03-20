@@ -73,5 +73,5 @@ public class TimedIntake extends CommandBase {
   @Override
   public boolean isFinished() {
     return callCounter >= calls;
-  }
+s  }
 }

@@ -37,7 +37,7 @@ public class MultiBallAuto extends SequentialCommandGroup {
       new ParallelCommandGroup(
         new DriveForTime(driveBase, 0.5, 2),
         new InstantCommand(() -> {intake.toggleRaised();}),
-        new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.INTAKE)
+        new TimedIntake(intake, storage, 1.0, 0.5, IntakeMode.INTAKE)
         //new IntakeBall(intake, colorSensor, storage)
         ),
         new ShooterRevManual(shooter, 1550),
