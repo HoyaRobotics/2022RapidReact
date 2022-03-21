@@ -86,6 +86,20 @@ public class DriveBase extends SubsystemBase {
     //return rightMaster.getSensorCollection().getIntergratedSensorVelocity();
   }
 
+  public void setBrakeMode(){
+    leftLeader.setNeutralMode(NeutralMode.Brake);
+    leftFollower.setNeutralMode(NeutralMode.Brake);
+    rightLeader.setNeutralMode(NeutralMode.Brake);
+    rightFollower.setNeutralMode(NeutralMode.Brake);
+  }
+
+  public void setCoastMode(){
+    leftLeader.setNeutralMode(NeutralMode.Coast);
+    leftFollower.setNeutralMode(NeutralMode.Coast);
+    rightLeader.setNeutralMode(NeutralMode.Coast);
+    rightFollower.setNeutralMode(NeutralMode.Coast);
+  }
+
   
     //Drives the robot with arcade controls, supplying throttle and rotation.
    
