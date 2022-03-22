@@ -24,7 +24,8 @@ public final class Constants {
 
              // Operator Controls:
              public static final int ROTATE_TURRET = Button.kRightStick.value;
-             public static final int TOGGLE_LIMELIGHT_ZOOM = Button.kB.value;
+//             public static final int TOGGLE_LIMELIGHT_ZOOM = Button.kB.value;
+            public static final int ANGLE_CLIMBER = Button.kB.value;
              public static final int INC_RPM_OFFSET = Button.kRightBumper.value;
              public static final int DEC_RPM_OFFSET = Button.kLeftBumper.value;
              public static final int CHANGE_TARGET_GOAL= Button.kY.value;  

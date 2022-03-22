@@ -105,6 +105,8 @@ public class DriveBase extends SubsystemBase {
    
   public void arcadeDrive(double throttle, double rotation){
     rotation *= -1;
+    SmartDashboard.putNumber("LeftEncoder", leftLeader.getSelectedSensorPosition());
+    SmartDashboard.putNumber("RightEncoder", rightLeader.getSelectedSensorPosition());
     SmartDashboard.putNumber("THROTTLE rr", throttle);
     SmartDashboard.putNumber("Rotation rr", rotation);
     drive.arcadeDrive(throttle, rotation);

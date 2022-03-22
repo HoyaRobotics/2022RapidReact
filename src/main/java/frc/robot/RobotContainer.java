@@ -42,7 +42,7 @@ public class RobotContainer {
   private final ColorSensor colorSensor = new ColorSensor();
   private final MultiBallAuto multiBallAuto = new MultiBallAuto( intake,  storage,  shooter,  driveBase, colorSensor);
   //private final Intakev2 intakev2 = new Intakev2();
-
+  private final MarchAuto marchAuto = new MarchAuto(driveBase, shooter, storage, intake);
 
   
 
@@ -56,9 +56,11 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    // Climber control
+    climber.setDefaultCommand(new ControlClimber(climber, () -> operator.getPOV()));
     storage.setDefaultCommand(new ControlStorage(storage, () -> driver.getPOV()));
     driveBase.setDefaultCommand(new DriveWithJoystick(driveBase, () -> driver.getLeftY(), () -> driver.getLeftX()));
-    turret.setDefaultCommand(new RotateWithJoystick(turret, () -> driver.getRightX()));
+    turret.setDefaultCommand(new RotateWithJoystick(turret, () -> operator.getRightX()));
     // Configure the button bindings
     configureButtonBindings();
 
@@ -67,6 +69,7 @@ public class RobotContainer {
     // Add commands to the autonomous command chooser
 m_chooser.setDefaultOption("Auto1 - Taxi", driveForTime);
 m_chooser.addOption("Multi auto", multiBallAuto);
+m_chooser.addOption("March auto", marchAuto);
 //m_chooser.addOption("Auto2", auto2);
 
 HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);
@@ -79,6 +82,9 @@ SmartDashboard.putData(HowToGetRPM);
 
     JoystickButton climbToNextRungBtn = new JoystickButton(operator, Controls.CLIMB_TO_NEXT_RUNG);
     climbToNextRungBtn.whenPressed(new ClimbToNextRung(climber));
+
+    JoystickButton angleClimberBtn = new JoystickButton(operator, Controls.ANGLE_CLIMBER);
+    angleClimberBtn.whenPressed(new InstantCommand(() ->{climber.toggleAngled();}));
 
     JoystickButton runIntakeBkd = new JoystickButton(driver, Controls.RUN_INTAKE_RVS);
     runIntakeBkd.whileHeld(new PoopBall(intake));

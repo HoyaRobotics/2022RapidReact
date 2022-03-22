@@ -19,19 +19,25 @@ public class MarchAuto extends CommandBase {
   private final Intakev2 intake;
   private int markFirstShot;
   private int markFedFirstShot;
+  private int markReachedBall;
+  private int markStartShot2;
+  private int markFeedShot2;
+  private int markEndShot2;
 //turn on brake mode
 //Rev shooter
 //feed ball
 //stop shooter
 //stop storage
-
 //drop intake
 //start intake
 //drive to ball
 //Stop intake
 //stop drivetrain
+
 //rev shooter
 //feed ball
+
+
 //turn towards other ball
 //start intake
 //drive to ball
@@ -49,9 +55,9 @@ public class MarchAuto extends CommandBase {
     this.shooter = shooter;
     this.storage = storage;
     this.intake = intake;
-    this.markFirstShot = (int)(0.5*50);
-    this.markFedFirstShot = (int)(0.5*50)+markFirstShot;
-  
+
+
+
     // Convert time in seconds to robot cycles (50 cycles/s)
     target = (int)(12 * 50);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -64,7 +70,12 @@ public class MarchAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    this.markFirstShot = (int)(1*50);
+    this.markFedFirstShot = (int)((2*50)+markFirstShot);
+    this.markReachedBall = (int)((2*50)+markFedFirstShot);
+    this.markStartShot2 =  (int)((1*50)+this.markReachedBall);
+    this.markFeedShot2 = (int)((1*50)+this.markStartShot2);
+    this.markEndShot2 = (int)((1*50)+this.markFeedShot2);    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -76,13 +87,38 @@ public class MarchAuto extends CommandBase {
     }
     //feed ball
     if(counter == markFirstShot){
+      
       this.storage.setIndexerRoller(-1);
+      this.intake.setRaised(false);
     }
     if(counter == markFedFirstShot){
+      
       this.storage.setIndexerRoller(0);
       this.shooter.setFlywheelRPM(0);
-      this.intake.toggleRaised();
+      
+      this.driveBase.arcadeDrive(-0.5,0);
+      
     }
+    if(counter == markFedFirstShot+1){
+      this.intake.setIntakeRoller(1.0);
+    }
+
+    if(counter > markFirstShot && counter < markReachedBall){
+      this.driveBase.arcadeDrive(-0.5,0);
+    }
+    if(counter == markReachedBall){
+      this.driveBase.arcadeDrive(0,0);
+      this.intake.setIntakeRoller(0);
+      this.shooter.setFlywheelRPM(2000);
+    }
+    if(counter == markStartShot2){
+      this.storage.setIndexerRoller(-1);
+    }
+    if(counter == markEndShot2){
+      this.storage.setIndexerRoller(0);
+      this.shooter.setFlywheelRPM(0);
+    }
+
     counter++;
   }
 
