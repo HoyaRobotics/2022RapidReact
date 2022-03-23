@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import frc.robot.utils.utils;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.Constants.*;
@@ -22,6 +22,7 @@ public class Turret extends SubsystemBase {
     }
 
     public void setRotatorSpeed(double speed){
+        speed = utils.applydeadband(speed, 0.25);
         rotator.set(ControlMode.PercentOutput, speed);
     }
 }
