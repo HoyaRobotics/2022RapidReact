@@ -85,4 +85,9 @@ public final class Constants {
         public static final double LL_HEIGHT_ABOVE_GROUND = 2.29; //2' 2 1/2"
         public static final double LL_TARGET_HEIGHT = 8.5;
         public static final double LL_SHOT_HEIGHT = LL_TARGET_HEIGHT-LL_HEIGHT_ABOVE_GROUND;
+
+        //Climber
+        public static final double CLIMBER_RIGHT_EXTENSION = 77.16856718;
+        public static final double CLIMBER_LEFT_EXTENSION = -73.24038017;
+
     }
