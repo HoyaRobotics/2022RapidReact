@@ -33,7 +33,7 @@ public class Intakev2 extends SubsystemBase {
     IntakeRoller.configPeakCurrentLimit(30,10);
     IntakeRoller.configPeakCurrentDuration(200, 10);
     
-    IntakeRoller.configOpenloopRamp(0.50);
+//    IntakeRoller.configOpenloopRamp(0.50);
     IntakeRoller.configContinuousCurrentLimit(25);
 
   }

@@ -23,6 +23,9 @@ public class MarchAuto extends CommandBase {
   private int markStartShot2;
   private int markFeedShot2;
   private int markEndShot2;
+  private int markStartTurn;
+  private int markEndTurn;
+  private double leftEncoderValue;
 //turn on brake mode
 //Rev shooter
 //feed ball
@@ -70,12 +73,15 @@ public class MarchAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    this.leftEncoderValue = 0;
     this.markFirstShot = (int)(1*50);
     this.markFedFirstShot = (int)((2*50)+markFirstShot);
     this.markReachedBall = (int)((2*50)+markFedFirstShot);
-    this.markStartShot2 =  (int)((1*50)+this.markReachedBall);
+    this.markStartShot2 =  (int)((1.5*50)+this.markReachedBall);
     this.markFeedShot2 = (int)((1*50)+this.markStartShot2);
-    this.markEndShot2 = (int)((1*50)+this.markFeedShot2);    
+    this.markEndShot2 = (int)((1*50)+this.markFeedShot2);
+    this.markStartTurn = (int)((1*50)+this.markEndShot2+50);
+    this.markEndTurn = (int)((0.5*50)+this.markStartTurn);    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -103,20 +109,33 @@ public class MarchAuto extends CommandBase {
       this.intake.setIntakeRoller(1.0);
     }
 
-    if(counter > markFirstShot && counter < markReachedBall){
+    if(counter > markFedFirstShot && counter < markReachedBall){
       this.driveBase.arcadeDrive(-0.5,0);
     }
     if(counter == markReachedBall){
       this.driveBase.arcadeDrive(0,0);
       this.intake.setIntakeRoller(0);
-      this.shooter.setFlywheelRPM(2000);
+      this.shooter.setFlywheelRPM(2295);
     }
     if(counter == markStartShot2){
       this.storage.setIndexerRoller(-1);
+      this.leftEncoderValue = this.driveBase.getLeftEncoder();
     }
     if(counter == markEndShot2){
       this.storage.setIndexerRoller(0);
       this.shooter.setFlywheelRPM(0);
+    }
+    if(counter == markStartTurn){
+      this.leftEncoderValue = this.driveBase.getLeftEncoder();
+    }
+    if((counter >=markStartTurn)
+    &&((counter < markEndTurn)
+    ||(this.driveBase.getLeftEncoder()<(this.leftEncoderValue-31727)))){
+      //turn!
+      driveBase.arcadeDrive(0.5, 1);
+    }
+    if(counter == (markEndTurn+1)){
+      driveBase.arcadeDrive(0,0);
     }
 
     counter++;

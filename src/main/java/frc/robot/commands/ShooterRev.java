@@ -21,6 +21,7 @@ public class ShooterRev extends CommandBase {
 
   private double targetRPM = 0;
   double distance = 0;
+  double x1, x2, y1, y2;
   public ShooterRev(Shooter shooter, Limelight limelight){
     this.shooter = shooter;
     this.limelight = limelight;
@@ -47,17 +48,58 @@ public class ShooterRev extends CommandBase {
       if(distance <2 )
         targetRPM = 3000;
       else if(distance <= 2.99)
-        targetRPM = 2875;
-      else if(distance <= 4.9)
-        targetRPM = 2875;
+      {
+       // targetRPM = 2875;
+       x1 = 2;
+       y1 = 3000;
+       x2 = 2.99;
+      y2 = 2875;
+      targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+
+      }
+        
+      else if(distance <= 4.9){
+        //targetRPM = 2875;
+        x1 = 2.99;
+        y1 = 2875;
+        x2 = 4.9;
+       y2 = 2875;
+       targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+      }
       else if(distance < 7.25)
-        targetRPM = 2500;
+        {//targetRPM = 2500;
+          x1 = 4.9;
+          y1 = 2875;
+          x2 = 7.25;
+         y2 = 2500;
+         targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+        }
       else if(distance <= 8.5)
-        targetRPM = 2350;
+      {
+        //targetRPM = 2350;
+        x1 = 7.25;
+        y1 = 2500;
+        x2 = 8.5;
+       y2 = 2350;
+       targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+      }
         else if(distance <=13.1)
-        targetRPM = 2283;
-        else if(distance <= 23.1)
-        targetRPM = 2283;
+        {
+        //targetRPM = 2283;
+        x1 = 8.5;
+        y1 = 2350;
+        x2 = 13.1;
+       y2 = 2283;
+       targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);  
+      }
+        else if(distance <= 23.1){
+        //targetRPM = 2283;
+        x1 = 13.1;
+        y1 = 2350;
+        x2 = 23.1;
+       y2 = 2283;
+       targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+        }
         else
         targetRPM = 2283;
     }
