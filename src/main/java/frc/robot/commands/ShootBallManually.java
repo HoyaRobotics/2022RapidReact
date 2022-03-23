@@ -18,8 +18,8 @@ public class ShootBallManually extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      /*new ShooterRevManual(shooter),*/
-      new ShooterRev(shooter, limelight),
+      new ShooterRevManual(shooter),
+      //new ShooterRev(shooter, limelight),
       new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.STORAGE)
       /*new ShooterRevManual(shooter),
       new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.STORAGE)*/
