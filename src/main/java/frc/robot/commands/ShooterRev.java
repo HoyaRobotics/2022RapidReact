@@ -22,6 +22,8 @@ public class ShooterRev extends CommandBase {
   private double targetRPM = 0;
   double distance = 0;
   double x1, x2, y1, y2;
+  double offsetRev;
+  double offsetLimelightY;
   public ShooterRev(Shooter shooter, Limelight limelight){
     this.shooter = shooter;
     this.limelight = limelight;
@@ -35,6 +37,8 @@ public class ShooterRev extends CommandBase {
     SmartDashboard.putBoolean("In Rev March 20", true);
     distance = limelight.getYOffset();
     SmartDashboard.putNumber("March distance", distance);
+    offsetRev = SmartDashboard.getNumber("Offset Rev", 0);
+    offsetLimelightY = SmartDashboard.getNumber("Offset LimelightY", 0);
     //distance = limelight.getDistanceFromTarget() + 0.5;
     //check if target visible
     //if visible, use table of values and offset to set RPM
@@ -168,7 +172,9 @@ public class ShooterRev extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
