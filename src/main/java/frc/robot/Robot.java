@@ -49,7 +49,8 @@ public class Robot extends TimedRobot {
     
     SmartDashboard.putNumber("Intake Speed McT",-1);
     SmartDashboard.putNumber("Target Shooter RPM",1000);
-    
+    SmartDashboard.putNumber("Offset Rev", 0);
+    SmartDashboard.putNumber("Offset LimelightY", 0);
 
 
   }
