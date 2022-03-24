@@ -61,15 +61,16 @@ public class RobotContainer {
     storage.setDefaultCommand(new ControlStorage(storage, () -> driver.getPOV()));
     driveBase.setDefaultCommand(new DriveWithJoystick(driveBase, () -> driver.getLeftY(), () -> driver.getLeftX()));
     turret.setDefaultCommand(new RotateWithJoystick(turret, () -> operator.getRightX()));
+
     // Configure the button bindings
     configureButtonBindings();
 
 //    auto2= new Auto2(driveBase,  intake,  storage);
 
     // Add commands to the autonomous command chooser
-m_chooser.setDefaultOption("Auto1 - Taxi", driveForTime);
+m_chooser.setDefaultOption("March auto", marchAuto);
 m_chooser.addOption("Multi auto", multiBallAuto);
-m_chooser.addOption("March auto", marchAuto);
+m_chooser.addOption("Auto1 - Taxi", driveForTime);
 //m_chooser.addOption("Auto2", auto2);
 
 HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);
@@ -77,6 +78,11 @@ HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);
 SmartDashboard.putData(m_chooser);
 SmartDashboard.putData(HowToGetRPM);
 
+JoystickButton increaseRPMBtn = new JoystickButton(operator, Controls.INC_RPM_OFFSET);
+increaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.incrementRPMOffset(100)));
+
+JoystickButton decreaseRPMBtn = new JoystickButton(operator, Controls.DEC_RPM_OFFSET);
+decreaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.decrementRPMOffset(100)));
     JoystickButton releaseClimberBtn = new JoystickButton(operator, Controls.RELEASE_CLIMBER);
     releaseClimberBtn.whileHeld(new ReleaseClimber(climber));
 

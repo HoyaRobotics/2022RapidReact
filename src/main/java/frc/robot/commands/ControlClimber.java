@@ -22,7 +22,9 @@ public class ControlClimber extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    this.climber.resetEncoderValues();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -32,9 +34,15 @@ public class ControlClimber extends CommandBase {
         // Up
         if(command == 0)
             climber.setClimberMotor(0.5);
-        // Down
+        else if(command == 90){
+          climber.setClimberMotorWithEncoder(0.75, false);
+        }
+            // Down
         else if(command == 180)
             climber.setClimberMotor(-0.5);
+        else if(command == 270){
+          climber.setClimberMotorWithEncoder(0.75, true);
+        }
         else
             climber.setClimberMotor(0);
 

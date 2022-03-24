@@ -132,7 +132,7 @@ public class MarchAuto extends CommandBase {
     &&((counter < markEndTurn)
     ||(this.driveBase.getLeftEncoder()<(this.leftEncoderValue-31727)))){
       //turn!
-      driveBase.arcadeDrive(0.5, 1);
+//      driveBase.arcadeDrive(0.5, 1);
     }
     if(counter == (markEndTurn+1)){
       driveBase.arcadeDrive(0,0);

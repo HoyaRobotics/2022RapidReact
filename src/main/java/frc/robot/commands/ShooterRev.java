@@ -45,8 +45,27 @@ public class ShooterRev extends CommandBase {
     }else{
       SmartDashboard.putNumber("TS TV", distance);
       //table of values
-      if(distance <2 )
-        targetRPM = 3000;
+      if(distance < -0.552796)
+      {
+        targetRPM = 3200;
+
+      }
+      else if(distance <=2 ){
+        //targetRPM = 3000;
+        x1 = -0.552796;
+       y1 = 3200;
+       x2 = 2;
+      y2 = 3100;
+      targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+      }
+      else if(distance <=2.88 ){
+        //targetRPM = 3000;
+        x1 = 2;
+       y1 = 3100;
+       x2 = 2.88;
+      y2 = 2900;//was 3000
+      targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+      }
       else if(distance <= 2.99)
       {
        // targetRPM = 2875;
@@ -56,14 +75,36 @@ public class ShooterRev extends CommandBase {
       y2 = 2875;
       targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
 
-      }
-        
+      }else if(distance <= 3.64){
+        //targetRPM = 2800
+        x1 = 2.99;
+        x2 = 3.64;
+        y1 = 2875;
+        y2 = 2800;
+        targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+
+      
+    }else if(distance <= 3.99){
+      //targetRPM = 2800
+      x1 = 3.64;
+      x2 = 3.99;
+      y1 = 2850;
+      y2 = 2800;
+      targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+    }else if(distance <= 4.20){
+      //targetRPM = 2800
+      x1 = 3.99;
+      x2 = 4.2;
+      y1 = 3000;
+      y2 = 2850;
+      targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+    }
       else if(distance <= 4.9){
         //targetRPM = 2875;
-        x1 = 2.99;
+        x1 = 4.2;
         y1 = 2875;
         x2 = 4.9;
-       y2 = 2875;
+       y2 = 3000;
        targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
       }
       else if(distance < 7.25)
@@ -79,6 +120,13 @@ public class ShooterRev extends CommandBase {
         //targetRPM = 2350;
         x1 = 7.25;
         y1 = 2500;
+        x2 = 8.5;
+       y2 = 2350;
+       targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
+      }else if(distance <= 9.65){
+        //targetRPM = 2600;
+        x1 = 8.5;
+        y1 = 2600;
         x2 = 8.5;
        y2 = 2350;
        targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);

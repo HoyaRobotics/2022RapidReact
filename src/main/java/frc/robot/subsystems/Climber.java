@@ -19,14 +19,22 @@ public class Climber extends SubsystemBase {
   private final Solenoid LeftSolenoid  = new Solenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_LEFT_PCM);
   private final Solenoid RightSolenoid  = new Solenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_RIGHT_PCM);
   private boolean angled = true;//flag to ensure intake starts raised.
-  
+  private double leftEncoderRetracted=0;
+  private double rightEncoderRetracted =0;
+  private double leftEncoderExtended = 0;
+  private double rightEncoderExtended = 0;
   
   public Climber() {
     this.LeftMotor = new CANSparkMax(Constants.CLIMBER_VERTICAL_L, MotorType.kBrushless);
     this.RightMotor = new CANSparkMax(Constants.CLIMBER_VERTICAL_R, MotorType.kBrushless);
     
-//    this.LeftMotor.setSmartCurrentLimit(35);
- //   this.RightMotor.setSmartCurrentLimit(35);
+    this.LeftMotor.setSmartCurrentLimit(35);
+    this.RightMotor.setSmartCurrentLimit(35);
+
+    this.leftEncoderRetracted = this.LeftMotor.getEncoder().getPosition()-5;
+    this.leftEncoderExtended = leftEncoderRetracted-70;
+    this.rightEncoderRetracted = this.RightMotor.getEncoder().getPosition()+5;
+    this.rightEncoderExtended = this.rightEncoderRetracted+70;
   }
 
   @Override
@@ -36,10 +44,44 @@ public class Climber extends SubsystemBase {
     SmartDashboard.putNumber("ClimbRM", this.RightMotor.getEncoder().getPosition());
   }
   
+  public void resetEncoderValues(){
+    this.leftEncoderRetracted = this.LeftMotor.getEncoder().getPosition()-5;
+    this.leftEncoderExtended = leftEncoderRetracted-70;
+    this.rightEncoderRetracted = this.RightMotor.getEncoder().getPosition()+5;
+    this.rightEncoderExtended = this.rightEncoderRetracted+70;
+  }
   public void setClimberMotor(double speed){
     
     this.LeftMotor.set(-speed);
     this.RightMotor.set(speed);
+  }
+  public void setClimberMotorWithEncoder(double speed,boolean retract){
+    if(retract){
+      //right -, left +
+      if(this.RightMotor.getEncoder().getPosition() > this.rightEncoderRetracted){
+        this.RightMotor.set(speed);
+      }else{
+        this.RightMotor.set(0);
+      }
+      if(this.LeftMotor.getEncoder().getPosition() < this.leftEncoderRetracted){
+        this.LeftMotor.set(-speed);
+      }else{
+        this.LeftMotor.set(0);
+      }
+    }else{
+      //right -, left +
+      if(this.RightMotor.getEncoder().getPosition() < this.rightEncoderExtended){
+        this.RightMotor.set(-speed);
+      }else{
+        this.RightMotor.set(0);
+      }
+      if(this.LeftMotor.getEncoder().getPosition() > this.leftEncoderExtended){
+        this.LeftMotor.set(speed);
+      }else{
+        this.LeftMotor.set(0);
+      }
+    }
+
   }
   
   /*Used to angle the arms*/
