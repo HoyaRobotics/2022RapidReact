@@ -28,6 +28,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  
+  public enum OperatorMode{OPERATE, LOG};
   // The robot's subsystems and commands are defined here...
 
   private final XboxController driver = new XboxController(DRIVER);
@@ -52,6 +54,8 @@ public class RobotContainer {
    // A chooser for autonomous commands
    SendableChooser<Command> m_chooser= new SendableChooser<>();
    SendableChooser<Command> HowToGetRPM = new SendableChooser<>();
+   SendableChooser<int> OperatorControls = new SendableChooser<>();
+  
    ShootBallManually shootBallManually = new ShootBallManually(intake, storage, shooter, limelight);
    DriveForTime driveForTime = new DriveForTime(driveBase, 0.5, 2);
    Auto2 auto2;
@@ -79,13 +83,23 @@ m_chooser.addOption("Auto1 - Taxi", driveForTime);
 //m_chooser.addOption("Auto2", auto2);
 
 HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);
+    OperatorControls.setDefaultOption("Operator",OperatorMode.OPERATE);
+    OperatorControls.setDefaultOption("Log Data",OperatorMode.LOG);
 // Put the chooser on the dashboard
 SmartDashboard.putData(m_chooser);
 SmartDashboard.putData(HowToGetRPM);
+SmartDashboard.putData(OperatorControls);
+    
+    if(SmartDashboard.getNumber("OperatorControls",0) ==OperatorMode.OPERATE){
+//JoystickButton increaseRPMBtn = new JoystickButton(operator, Controls.INC_RPM_OFFSET);
+//increaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.incrementRPMOffset(0)));
+      //this might have been our problem with overshooting
+    }else if(SmartDashboard.getNumber("OperatorControls",0) ==OperatorMode.LOG){
+      JoystickButton increaseRPMBtn = new JoystickButton(operator, Controls.INC_RPM_OFFSET);
+      increaseRPMBtn.whenPressed(New LogShotInfo(0));
 
-JoystickButton increaseRPMBtn = new JoystickButton(operator, Controls.INC_RPM_OFFSET);
-increaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.incrementRPMOffset(100)));
-
+    }
+      
 JoystickButton decreaseRPMBtn = new JoystickButton(operator, Controls.DEC_RPM_OFFSET);
 decreaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.decrementRPMOffset(100)));
     JoystickButton releaseClimberBtn = new JoystickButton(operator, Controls.RELEASE_CLIMBER);

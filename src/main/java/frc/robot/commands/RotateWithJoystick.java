@@ -32,9 +32,11 @@ public class RotateWithJoystick extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute(){
-      double speed = utils.applydeadband(input.getAsDouble(), Constants.CONTROL_DEADBAND) / 2;
+      //double speed = utils.applydeadband(input.getAsDouble(), Constants.CONTROL_DEADBAND) / 2;
       //                                                                                    ^
       //                                  divide by two to allow for much finer turret control
+      double speed = utils.applydeadband(input.getAsDouble(), Constants.CONTROL_DEADBAND) / 3;
+      // changed to 3 to slow down the turret.
       turret.setRotatorSpeed(speed);
   }
 

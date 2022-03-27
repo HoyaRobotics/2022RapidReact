@@ -17,6 +17,7 @@ import frc.robot.subsystems.DriveBase;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.TimedIntake;
 import frc.robot.commands.Auto2;
+import frc.robot.utils.Logger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -70,6 +71,7 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    Logger.flush();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
