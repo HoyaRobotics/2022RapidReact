@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intakev2 extends SubsystemBase {
   //solenoids and motors intake uses
-  private final Solenoid raiser = new Solenoid(PneumaticsModuleType.REVPH, Constants.INTAKE_RAISER);
+  private final Solenoid raiser = new Solenoid(14, PneumaticsModuleType.REVPH, 8);
   private final WPI_TalonSRX IntakeRoller = new WPI_TalonSRX(Constants.INTAKE_ROLLER);
   private boolean raised = true;//flag to ensure intake starts raised.
 

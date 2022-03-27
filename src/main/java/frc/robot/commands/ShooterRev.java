@@ -139,24 +139,28 @@ public class ShooterRev extends CommandBase {
         {
         //targetRPM = 2283;
         x1 = 8.5;
-        y1 = 2350;
+        y1 = 2400;//was 2350
         x2 = 13.1;
-       y2 = 2283;
+       y2 = 2283;//was 2283
        targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);  
       }
         else if(distance <= 23.1){
         //targetRPM = 2283;
         x1 = 13.1;
-        y1 = 2350;
+        y1 = 2450;
         x2 = 23.1;
-       y2 = 2283;
+       y2 = 2350;//was 2283
        targetRPM = (y2-y1)/(x2-x1)*distance+(y2-((y2-y1)/(x2-x1))*x2);
         }
         else
         targetRPM = 2283;
     }
 
-    shooter.setFlywheelRPM(targetRPM);
+    if(SmartDashboard.getBoolean("low shot", false))
+    {
+      targetRPM = 1250;
+    }
+    shooter.setFlywheelRPM(targetRPM+SmartDashboard.getNumber("Offset Rev", 0));
 
     // double distance = limelight.getDistanceFromTarget() + 0.5;
 

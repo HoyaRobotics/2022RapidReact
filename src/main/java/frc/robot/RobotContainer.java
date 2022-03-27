@@ -2,8 +2,10 @@ package frc.robot;
 
 import static frc.robot.Constants.*;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.*;
 import frc.autos.MultiBallAuto;
@@ -41,6 +43,7 @@ public class RobotContainer {
   private final Climber climber = new Climber();
   private final ColorSensor colorSensor = new ColorSensor();
   private final MultiBallAuto multiBallAuto = new MultiBallAuto( intake,  storage,  shooter,  driveBase, colorSensor);
+  private final Compressor compressor = new Compressor(13,PneumaticsModuleType.CTREPCM);
   //private final Intakev2 intakev2 = new Intakev2();
   private final MarchAuto marchAuto = new MarchAuto(driveBase, shooter, storage, intake);
 
@@ -61,6 +64,8 @@ public class RobotContainer {
     storage.setDefaultCommand(new ControlStorage(storage, () -> driver.getPOV()));
     driveBase.setDefaultCommand(new DriveWithJoystick(driveBase, () -> driver.getLeftY(), () -> driver.getLeftX()));
     turret.setDefaultCommand(new RotateWithJoystick(turret, () -> operator.getRightX()));
+
+    compressor.enableDigital();
 
     // Configure the button bindings
     configureButtonBindings();

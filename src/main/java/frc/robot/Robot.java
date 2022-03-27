@@ -51,7 +51,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Target Shooter RPM",1000);
     SmartDashboard.putNumber("Offset Rev", 0);
     SmartDashboard.putNumber("Offset LimelightY", 0);
-
+    SmartDashboard.putBoolean("low shot", false);
 
   }
    
