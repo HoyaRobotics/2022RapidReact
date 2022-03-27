@@ -54,7 +54,7 @@ public class RobotContainer {
    // A chooser for autonomous commands
    SendableChooser<Command> m_chooser= new SendableChooser<>();
    SendableChooser<Command> HowToGetRPM = new SendableChooser<>();
-   SendableChooser<int> OperatorControls = new SendableChooser<>();
+   SendableChooser<OperatorMode> OperatorControls = new SendableChooser<>();
   
    ShootBallManually shootBallManually = new ShootBallManually(intake, storage, shooter, limelight);
    DriveForTime driveForTime = new DriveForTime(driveBase, 0.5, 2);
@@ -89,57 +89,64 @@ HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);
 SmartDashboard.putData(m_chooser);
 SmartDashboard.putData(HowToGetRPM);
 SmartDashboard.putData(OperatorControls);
-    
-    if(SmartDashboard.getNumber("OperatorControls",0) ==OperatorMode.OPERATE){
-//JoystickButton increaseRPMBtn = new JoystickButton(operator, Controls.INC_RPM_OFFSET);
-//increaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.incrementRPMOffset(0)));
-      //this might have been our problem with overshooting
-    }else if(SmartDashboard.getNumber("OperatorControls",0) ==OperatorMode.LOG){
-      JoystickButton increaseRPMBtn = new JoystickButton(operator, Controls.INC_RPM_OFFSET);
-      increaseRPMBtn.whenPressed(New LogShotInfo(0));
+
+//Defining our buttons
+ //Operator commands
+  //Climber commands
+JoystickButton releaseClimberBtn = new JoystickButton(operator, Controls.RELEASE_CLIMBER);
+JoystickButton climbToNextRungBtn = new JoystickButton(operator, Controls.CLIMB_TO_NEXT_RUNG);
+JoystickButton angleClimberBtn = new JoystickButton(operator, Controls.ANGLE_CLIMBER);
+  //Shooting commands
+JoystickButton changeTargetGoal = new JoystickButton(operator, Controls.CHANGE_TARGET_GOAL);//Note: Functionality not programmed yet.
+
+//JoystickButton increaseRPMBtn = new JoystickButton(operator, Controls.INC_RPM_OFFSET); //Note: functionality disabled after York competiton.
+// JoystickButton decreaseRPMBtn = new JoystickButton(operator, Controls.DEC_RPM_OFFSET);
+
+//Driver commands
+  //Intake commands
+JoystickButton toggleIntakeRaised = new JoystickButton(driver, Controls.TOGGLE_INTAKE_RAISED);
+JoystickButton runIntakeBkd = new JoystickButton(driver, Controls.RUN_INTAKE_RVS);
+JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
+  //Camera commands
+JoystickButton changeCameraViewBtn = new JoystickButton(driver, Controls.TOGGLE_CAMERA_VIEW);
+  //Shooting commands
+JoystickButton shootBallBtn = new JoystickButton(driver, Controls.SHOOT_BALL);
+
+//OperatorMode based commands
+    if(SmartDashboard.getNumber("OperatorControls",0) == (OperatorMode.OPERATE.ordinal())){
+
+      climbToNextRungBtn.whenPressed(new ClimbToNextRung(climber));//A
+      angleClimberBtn.whenPressed(new InstantCommand(() ->{climber.toggleAngled();}));//B
+      //Change target goal functionality hasn't been added, when it is, define that command here. -Ethan.M
+      //changeTargetGoal.whenPressed(new InstantCommand(() ->{**SUBSYTEM.CHANGE TARGET GOAL COMMAND();})); //Y
+
+    }else if(SmartDashboard.getNumber("OperatorControls",0) == OperatorMode.LOG.ordinal()){
+      
+      changeTargetGoal.whenPressed(new LogShotInfo(1));//Y, Shot went past the target, RPM is too high.
+      angleClimberBtn.whenPressed(new LogShotInfo(0));//B, Shot went in, good RPM
+      climbToNextRungBtn.whenPressed(new LogShotInfo(-1)); //A, Shot went short of target, too low RPM
 
     }
-      
-JoystickButton decreaseRPMBtn = new JoystickButton(operator, Controls.DEC_RPM_OFFSET);
-decreaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.decrementRPMOffset(100)));
-    JoystickButton releaseClimberBtn = new JoystickButton(operator, Controls.RELEASE_CLIMBER);
+    
+    //Not OperatorMode dependant commands - These are the controls we want to use regardless of what mode we have the robot in.
+
     releaseClimberBtn.whileHeld(new ReleaseClimber(climber));
 
-    JoystickButton climbToNextRungBtn = new JoystickButton(operator, Controls.CLIMB_TO_NEXT_RUNG);
-    climbToNextRungBtn.whenPressed(new ClimbToNextRung(climber));
-
-    JoystickButton angleClimberBtn = new JoystickButton(operator, Controls.ANGLE_CLIMBER);
-    angleClimberBtn.whenPressed(new InstantCommand(() ->{climber.toggleAngled();}));
-
-    JoystickButton runIntakeBkd = new JoystickButton(driver, Controls.RUN_INTAKE_RVS);
+    toggleIntakeRaised.whenPressed(new InstantCommand(() -> {intake.toggleRaised();}));
     runIntakeBkd.whileHeld(new PoopBall(intake));
-    JoystickButton runIntakeFwd = new JoystickButton(driver,Controls.RUN_INTAKE_FWD);
-    /*Mct - intake, this is the old way to call it*/
     runIntakeFwd.whileHeld(new IntakeBall(intake, colorSensor, storage));
-
-    JoystickButton changeCameraViewBtn = new JoystickButton(driver, Controls.TOGGLE_CAMERA_VIEW);
-    changeCameraViewBtn.whenPressed(new ChangeCameraView());
-
-    JoystickButton shootBallBtn = new JoystickButton(driver, Controls.SHOOT_BALL);
-    shootBallBtn.whenPressed(HowToGetRPM.getSelected());
-    shootBallBtn.whenReleased(new StopShooter(shooter));
-    //McT check this out
-    //checked - moved to ChangeCameraView
-    /*@Override
-    public void teleopPeriodic() {
-      if (joy1.getTriggerPressed()) {
-        System.out.println("Setting camera 2");
-        cameraSelection.setString(camera2.getName());
-      } else if (joy1.getTriggerReleased()) { 
-        System.out.println("Settingcamera 1");
-        cameraSelection.setString(camera1.getName());
-      }
-    }
- */ 
     /*Mct - intake, this is the old way to call it*/
     runIntakeFwd.whenReleased(new StopIntake(intake, storage));
     runIntakeBkd.whenReleased(new StopIntake(intake, storage));
-    /*
+      
+    changeCameraViewBtn.whenPressed(new ChangeCameraView());
+
+    shootBallBtn.whenPressed(HowToGetRPM.getSelected());
+    shootBallBtn.whenReleased(new StopShooter(shooter));
+    
+    //increaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.incrementRPMOffset(0)));
+    //this might have been our problem with overshooting
+    // decreaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.decrementRPMOffset(100)));
     
     /*
     runIntakeFwd.whileHeld(new InstantCommand(() -> {
@@ -165,8 +172,6 @@ decreaseRPMBtn.whenPressed(new InstantCommand(() -> shooter.decrementRPMOffset(1
     }
     ));*/
 
-    JoystickButton toggleIntakeRaised = new JoystickButton(driver, Controls.TOGGLE_INTAKE_RAISED);
-    toggleIntakeRaised.whenPressed(new InstantCommand(() -> {intake.toggleRaised();}));
 //end old intake*/
   }
 
