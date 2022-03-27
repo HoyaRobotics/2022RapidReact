@@ -16,8 +16,8 @@ public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
   private CANSparkMax LeftMotor;
   private CANSparkMax RightMotor;
-  private final Solenoid LeftSolenoid  = new Solenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_LEFT_PCM);
-  private final Solenoid RightSolenoid  = new Solenoid(PneumaticsModuleType.REVPH, Constants.CLIMBER_RIGHT_PCM);
+ // private final Solenoid LeftSolenoid  = new Solenoid(14, PneumaticsModuleType.REVPH, 8);
+  private final Solenoid RightSolenoid  = new Solenoid(14, PneumaticsModuleType.REVPH, 14);
   private boolean angled = true;//flag to ensure intake starts raised.
   private double leftEncoderRetracted=0;
   private double rightEncoderRetracted =0;
@@ -89,7 +89,7 @@ public class Climber extends SubsystemBase {
     if(this.angled != angled)
       this.angled = angled;
 
-    LeftSolenoid.set(!this.angled);
+    //LeftSolenoid.set(!this.angled);
     RightSolenoid.set(!this.angled);
   }
 
