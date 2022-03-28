@@ -84,7 +84,7 @@ m_chooser.addOption("Auto1 - Taxi", driveForTime);
 
 HowToGetRPM.setDefaultOption("From Dashboard", shootBallManually);
     OperatorControls.setDefaultOption("Operator",OperatorMode.OPERATE);
-    OperatorControls.setDefaultOption("Log Data",OperatorMode.LOG);
+    OperatorControls.addOption("Log Data",OperatorMode.LOG);
 // Put the chooser on the dashboard
 SmartDashboard.putData(m_chooser);
 SmartDashboard.putData(HowToGetRPM);
@@ -113,14 +113,20 @@ JoystickButton changeCameraViewBtn = new JoystickButton(driver, Controls.TOGGLE_
 JoystickButton shootBallBtn = new JoystickButton(driver, Controls.SHOOT_BALL);
 
 //OperatorMode based commands
-    if(SmartDashboard.getNumber("OperatorControls",0) == (OperatorMode.OPERATE.ordinal())){
-
+System.out.println("***********************************\n\rV2 Operator Mode");
+System.out.println(OperatorMode.OPERATE.ordinal());
+System.out.println("NEW ONE!@!!");
+System.out.println(OperatorControls.getSelected());
+System.out.println((int)(OperatorMode.LOG.ordinal()));
+System.out.println((int)(SmartDashboard.getNumber("OperatorControls",0)));
+    if(OperatorControls.getSelected() == (OperatorMode.OPERATE)){
+      
       climbToNextRungBtn.whenPressed(new ClimbToNextRung(climber));//A
       angleClimberBtn.whenPressed(new InstantCommand(() ->{climber.toggleAngled();}));//B
       //Change target goal functionality hasn't been added, when it is, define that command here. -Ethan.M
       //changeTargetGoal.whenPressed(new InstantCommand(() ->{**SUBSYTEM.CHANGE TARGET GOAL COMMAND();})); //Y
 
-    }else if(SmartDashboard.getNumber("OperatorControls",0) == OperatorMode.LOG.ordinal()){
+    }else if(OperatorControls.getSelected() == OperatorMode.LOG){
       
       changeTargetGoal.whenPressed(new LogShotInfo(1));//Y, Shot went past the target, RPM is too high.
       angleClimberBtn.whenPressed(new LogShotInfo(0));//B, Shot went in, good RPM
