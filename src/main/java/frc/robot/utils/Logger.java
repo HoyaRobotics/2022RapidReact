@@ -30,6 +30,7 @@ public class Logger{
 
     private Logger(){
         try{    
+            System.out.println("creating file");
             // "/U" is the default directory for RoboRIO flash drives
             File logFile = new File("/U/logs/latest.txt");
 
@@ -51,6 +52,7 @@ public class Logger{
             writer = new FileWriter(logFile);
         }catch(IOException e){
             e.printStackTrace();
+            System.out.println("error printing file");
         }
     }
 

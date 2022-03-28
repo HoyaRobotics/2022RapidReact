@@ -20,7 +20,7 @@ public class IntakeCamera extends SubsystemBase {
   final double GOAL_RANGE_METERS = Units.feetToMeters(3);
 
   // Change this to match the name of your camera
-  PhotonCamera intakeCamera = new PhotonCamera("photonvision");
+  //PhotonCamera intakeCamera = new PhotonCamera("photonvision");
 
   
   /** Creates a new IntakeCamera. */

@@ -28,6 +28,7 @@ public class LogShotInfo extends CommandBase {
   @Override
   public void execute() {
     Logger.info((new StringBuilder()).append("Shot result: ").append(String.valueOf(this.distance)).toString());
+    System.out.println("in log shot info");
     end(false);                           
   }
   

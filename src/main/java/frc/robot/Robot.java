@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
   
-  UsbCamera camera1;
+//  UsbCamera camera1;
   NetworkTableEntry cameraSelection;
 
   /**
@@ -44,7 +44,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     //SmartDashboard.putData(CommandScheduler.getInstance());
     
-    camera1 = CameraServer.startAutomaticCapture(0);
+//    camera1 = CameraServer.startAutomaticCapture(0);
     
     cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
     
