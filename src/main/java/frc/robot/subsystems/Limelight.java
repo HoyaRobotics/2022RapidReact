@@ -18,7 +18,7 @@ public class Limelight extends SubsystemBase {
   private final NetworkTableEntry xOffset = table.getEntry("tx");
   private final NetworkTableEntry yOffset = table.getEntry("ty");
   private final NetworkTableEntry tv = table.getEntry("tv");
-
+  private final NetworkTableEntry ta = table.getEntry("ta");
   private int currentPipeline = 0;
   
   @Override
@@ -45,6 +45,10 @@ public class Limelight extends SubsystemBase {
   }
   public double getXOffset(){
     return xOffset.getDouble(0);
+  }
+
+  public double getArea(){
+    return ta.getDouble(0);
   }
 
   public double getYOffset(){

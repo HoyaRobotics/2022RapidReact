@@ -48,6 +48,7 @@ public class Robot extends TimedRobot {
     
     cameraSelection = NetworkTableInstance.getDefault().getTable("").getEntry("CameraSelection");
     
+    SmartDashboard.putBoolean("NormalMode", false);
     SmartDashboard.putNumber("Intake Speed McT",-1);
     SmartDashboard.putNumber("Target Shooter RPM",1000);
     SmartDashboard.putNumber("Offset Rev", 0);

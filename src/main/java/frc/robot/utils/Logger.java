@@ -52,7 +52,8 @@ public class Logger{
             writer = new FileWriter(logFile);
         }catch(IOException e){
             e.printStackTrace();
-            System.out.println("error printing file");
+            System.out.println("error printing file ");
+            System.out.println(e.getMessage());
         }
     }
 

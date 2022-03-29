@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import frc.robot.utils.Logger;
 import frc.robot.commands.TimedIntake.IntakeMode;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -17,9 +18,13 @@ public class ShootBallManually extends SequentialCommandGroup {
   public ShootBallManually(Intakev2 intake, Storage storage, Shooter shooter, Limelight limelight) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
+    Logger.info("TV: ");    
+    Logger.info(String.valueOf(limelight.getTV()));
+    Logger.info("TY: ");
+    Logger.info(String.valueOf(limelight.getYOffset()));
     addCommands(
-//      new ShooterRevManual(shooter),
-      new ShooterRev(shooter, limelight),
+      new ShooterRevManual(shooter, limelight),
+//      new ShooterRev(shooter, limelight),
       new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.STORAGE)
       /*new ShooterRevManual(shooter),
       new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.STORAGE)*/

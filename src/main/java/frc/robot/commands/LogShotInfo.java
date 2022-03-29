@@ -21,15 +21,15 @@ public class LogShotInfo extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
+    Logger.info((new StringBuilder()).append("Shot result: ").append(String.valueOf(this.distance)).toString());
+    //System.out.println("in log shot info");
+    end(false);                               
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Logger.info((new StringBuilder()).append("Shot result: ").append(String.valueOf(this.distance)).toString());
-    System.out.println("in log shot info");
-    end(false);                           
+
   }
   
   // Called once the command ends or is interrupted.
