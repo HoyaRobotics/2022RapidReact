@@ -1,0 +1,20 @@
+100003
+[5.080562] [INFO]: TV: 
+[5.143026] [INFO]: 0.0
+[5.144114] [INFO]: TY: 
+[5.144814] [INFO]: 0.0
+[5.145617] [INFO]: Limelight y: 
+[5.146431] [INFO]: 0.0
+[5.146909] [INFO]: Limelight v: 
+[5.147637] [INFO]: 0.0
+[5.14799] [INFO]: Limelight x: 
+[5.148438] [INFO]: 0.0
+[5.150801] [INFO]: Limelight area: 
+[5.151286] [INFO]: 0.0
+[40.344292] [INFO]: Shot result: -1
+[68.27103] [INFO]: Started revving shooter to 3000.0RPM
+[70.086749] [INFO]: Finished revving shooter
+[73.1239] [INFO]: Shot result: 1
+[219.345158] [INFO]: Started revving shooter to 2500.0RPM
+[221.024552] [INFO]: Finished revving shooter
+[225.264501] [INFO]: Shot result: 0
