@@ -56,6 +56,12 @@ public ShooterRevManual(Shooter shooter, int rpmTarget){
         Logger.info("Limelight area: ");
         Logger.info(String.valueOf(limelight.getArea()));
       }catch(Exception e){
+        Logger.info("Error with limelight logging");
+        Logger.info(e.getMessage());
+        System.out.println("***************************************************");
+        System.out.println("McTavish - limelight issue for logging!");
+        System.out.println("***************************************************");
+
         System.out.println(e.getMessage());
       }
   }

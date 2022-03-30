@@ -23,8 +23,8 @@ public class ShootBallManually extends SequentialCommandGroup {
     Logger.info("TY: ");
     Logger.info(String.valueOf(limelight.getYOffset()));
     addCommands(
-      new ShooterRevManual(shooter, limelight),
-//      new ShooterRev(shooter, limelight),
+     // new ShooterRevManual(shooter, limelight),
+      new ShooterRev(shooter, limelight),
       new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.STORAGE)
       /*new ShooterRevManual(shooter),
       new TimedIntake(intake, storage, -1.0, 0.5, IntakeMode.STORAGE)*/

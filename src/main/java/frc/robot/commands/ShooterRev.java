@@ -48,7 +48,71 @@ public class ShooterRev extends CommandBase {
       SmartDashboard.putNumber("TS TV", 0);
     }else{
       SmartDashboard.putNumber("TS TV", distance);
-      //table of values
+      //if based on March 30 shot testing.
+
+      if(distance < 6.132811546){
+        targetRPM = 2785;
+      }else if(distance <  7.560172080993652){
+        targetRPM = 2750;
+      }else if(distance < 8.343558311){
+        targetRPM = 2550;
+      }else if(distance <  9.360091209411621){
+        targetRPM = 2708;
+      }else if(distance <  9.831542015075684){
+        targetRPM = 2500;
+      }else if(distance < 11.81616879){
+        targetRPM = 2400;
+      }else if(distance < 12.61730099){
+        targetRPM = 2250;
+      }else if(distance < 17.94713402){
+        targetRPM = 2350;
+      }else if(distance < 23.27815819){
+        targetRPM = 2300;
+      }else{
+        targetRPM = 2300;
+      }
+    }
+
+    if(SmartDashboard.getBoolean("low shot", false))
+    {
+      targetRPM = 1250;
+    }
+    shooter.setFlywheelRPM(targetRPM+SmartDashboard.getNumber("Offset Rev", 0));
+
+    // double distance = limelight.getDistanceFromTarget() + 0.5;
+
+    //   if (distance <= 30)
+    //       targetRPM = (distance * 34.1) + 2505;
+    //   else
+    //       targetRPM = 3750;
+
+    //   shooter.setFlywheelRPM(targetRPM);
+
+    //   Logger.info("Started revving shooter to " + targetRPM + "RPM");
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    Logger.info("Finished revving shooter");
+    SmartDashboard.putBoolean("In Rev March 20", false);
+
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return shooter.isStable();
+  }
+}
+/*March 29 if statement:
+//table of values
       if(distance < -0.552796)
       {
         targetRPM = 3200;
@@ -154,43 +218,4 @@ public class ShooterRev extends CommandBase {
         }
         else
         targetRPM = 2283;
-    }
-
-    if(SmartDashboard.getBoolean("low shot", false))
-    {
-      targetRPM = 1250;
-    }
-    shooter.setFlywheelRPM(targetRPM+SmartDashboard.getNumber("Offset Rev", 0));
-
-    // double distance = limelight.getDistanceFromTarget() + 0.5;
-
-    //   if (distance <= 30)
-    //       targetRPM = (distance * 34.1) + 2505;
-    //   else
-    //       targetRPM = 3750;
-
-    //   shooter.setFlywheelRPM(targetRPM);
-
-    //   Logger.info("Started revving shooter to " + targetRPM + "RPM");
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-
-  }
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    Logger.info("Finished revving shooter");
-    SmartDashboard.putBoolean("In Rev March 20", false);
-
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return shooter.isStable();
-  }
-}
+    }*/
