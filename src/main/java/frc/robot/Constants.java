@@ -65,7 +65,7 @@ public final class Constants {
 
     
         //Drivebase
-        public static final double CONTROL_DEADBAND = 0.10;
+        public static final double CONTROL_DEADBAND = 0.07;//was 0.10
         public static final int SENSOR_UNITS_PER_ROTATION = 2048;
         public static final int ENCODER_UNITS_PER_ROTATION = 24140;
         public static final int ACCEL_UNITS = 473000;

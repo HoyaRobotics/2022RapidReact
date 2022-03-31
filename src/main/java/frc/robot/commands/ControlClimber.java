@@ -33,15 +33,15 @@ public class ControlClimber extends CommandBase {
     // Elevator control:
         // Up
         if(command == 0)
-            climber.setClimberMotor(0.5);
+            climber.setClimberMotor(-0.75);
         else if(command == 90){
-          climber.setClimberMotorWithEncoder(0.75, false);
+         // climber.setClimberMotorWithEncoder(0.75, false);
         }
             // Down
         else if(command == 180)
-            climber.setClimberMotor(-0.5);
+            climber.setClimberMotor(0.75);
         else if(command == 270){
-          climber.setClimberMotorWithEncoder(0.75, true);
+   //       climber.setClimberMotorWithEncoder(0.75, true);
         }
         else
             climber.setClimberMotor(0);

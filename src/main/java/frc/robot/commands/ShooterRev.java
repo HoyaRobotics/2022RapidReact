@@ -49,8 +49,42 @@ public class ShooterRev extends CommandBase {
     }else{
       SmartDashboard.putNumber("TS TV", distance);
       //if based on March 30 shot testing.
-
-      if(distance < 6.132811546){
+      if(distance < -0.06){
+        //y = -139.65x + 3072.2
+        targetRPM = -139.65*distance + 3072.2;
+//        targetRPM = 3085;
+      }
+      if(distance < 0.22){
+        targetRPM = 3050;
+      }
+      if(distance < 0.41){
+        targetRPM = 3025;
+      }
+      else if(distance < 0.66){
+        targetRPM = 2950;
+      }
+      else if(distance < 1.51){
+        targetRPM = 2860;
+      }
+      else if(distance < 1.73){
+        targetRPM = 2830;
+      }
+      else if(distance < 1.94){
+        targetRPM = 2810;
+      }
+      else if(distance < 3.42){
+        targetRPM = 2810;
+      }
+      else if(distance < 3.80){
+        targetRPM = 2802;
+      }
+      else if(distance < 4.46){
+        targetRPM = 2798;
+      }
+      else if(distance < 5.40){
+        targetRPM = 2785;
+      }
+      else if(distance < 6.132811546){
         targetRPM = 2785;
       }else if(distance <  7.560172080993652){
         targetRPM = 2750;
@@ -60,6 +94,9 @@ public class ShooterRev extends CommandBase {
         targetRPM = 2708;
       }else if(distance <  9.831542015075684){
         targetRPM = 2500;
+      }else if(distance < 10.75){
+        targetRPM = 2500;
+      
       }else if(distance < 11.81616879){
         targetRPM = 2400;
       }else if(distance < 12.61730099){
@@ -71,14 +108,16 @@ public class ShooterRev extends CommandBase {
       }else{
         targetRPM = 2300;
       }
+    //  targetRPM = -139.65*distance + 3072.2;
     }
 
     if(SmartDashboard.getBoolean("low shot", false))
     {
       targetRPM = 1250;
-    }
+      shooter.setFlywheelRPM(targetRPM);
+    }else{
     shooter.setFlywheelRPM(targetRPM+SmartDashboard.getNumber("Offset Rev", 0));
-
+    }
     // double distance = limelight.getDistanceFromTarget() + 0.5;
 
     //   if (distance <= 30)
