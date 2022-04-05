@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intakev2;
 import frc.robot.subsystems.Shooter;
@@ -115,7 +117,7 @@ public class MarchAuto extends CommandBase {
     if(counter == markReachedBall){
       this.driveBase.arcadeDrive(0,0);
       this.intake.setIntakeRoller(0);
-      this.shooter.setFlywheelRPM(2295);
+      this.shooter.setFlywheelRPM(SmartDashboard.getNumber("Auto2rpm", Constants.AUTO_SHOT2_RPM));
     }
     if(counter == markStartShot2){
       this.storage.setIndexerRoller(-1);

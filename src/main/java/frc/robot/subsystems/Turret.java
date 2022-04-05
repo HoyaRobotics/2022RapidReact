@@ -22,7 +22,7 @@ public class Turret extends SubsystemBase {
     }
 
     public void setRotatorSpeed(double speed){
-        speed = utils.applydeadband(speed, 0.25);
+        speed = utils.applydeadband(speed, 0);//was 0.25
         rotator.set(ControlMode.PercentOutput, speed);
     }
 }
