@@ -91,5 +91,6 @@ public final class Constants {
         public static final double CLIMBER_LEFT_EXTENSION = -73.24038017;
 
         //Autonomous
-        public static final double AUTO_SHOT2_RPM = 2295;
+        public static final double AUTO_SHOT1_RPM = 2500;
+        public static final double AUTO_SHOT2_RPM = 2750;
     }

@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Offset LimelightY", 0);
     SmartDashboard.putBoolean("low shot", false);
     SmartDashboard.putNumber("Auto2rpm", Constants.AUTO_SHOT2_RPM);
-    SmartDashboard.putNumber("April Auto First Shot", Constants.AUTO_SHOT2_RPM);
+    SmartDashboard.putNumber("April Auto First Shot", Constants.AUTO_SHOT1_RPM);
     SmartDashboard.putNumber("April Auto Second Shot", Constants.AUTO_SHOT2_RPM);
     SmartDashboard.putNumber("Offset Rev Long", 0);
     SmartDashboard.putNumber("shootSecondBall",2*50);

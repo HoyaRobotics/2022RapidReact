@@ -21,6 +21,7 @@ public class AprilAuto extends CommandBase {
   private final Intakev2 intake;
   private int shootFirstBall;
   private int lowerIntake;
+  private int delayForIntake;
   private int shootSecondBall;
   private int raiseIntake;
   private int driveFromSecondPosition;
@@ -76,13 +77,14 @@ public class AprilAuto extends CommandBase {
   @Override
   public void initialize() {
     this.AprilleftEncoderValue = 0;
-    this.aimFirstBall = (int)(2*50);
-    this.shootFirstBall = (int)(1*50)+aimFirstBall;
-    this.lowerIntake = (int)((2*50)+shootFirstBall);
-    this.aimSecondBall = (int)((1*50)+lowerIntake);
-    this.shootSecondBall = (int)((SmartDashboard.getNumber("shootSecondBall",2*50))+aimSecondBall);
-    this.driveFromSecondPosition =  (int)((1.5*50)+this.shootSecondBall);
-    this.endDrive = (int)((1*50)+this.driveFromSecondPosition);   
+    this.aimFirstBall = (int)(75);
+    this.shootFirstBall = (int)(100)+aimFirstBall;
+    this.lowerIntake = (int)((50)+shootFirstBall);
+    this.delayForIntake = (int)((50)+lowerIntake);
+    this.aimSecondBall = (int)((75)+delayForIntake);
+    this.shootSecondBall = (int)((SmartDashboard.getNumber("shootSecondBall",150))+aimSecondBall);
+    this.driveFromSecondPosition =  (int)((50)+this.shootSecondBall);
+    this.endDrive = (int)((50)+this.driveFromSecondPosition);   
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -91,37 +93,44 @@ public class AprilAuto extends CommandBase {
     if(counter == 0){
       this.driveBase.setBrakeMode();
       this.driveBase.arcadeDrive(-0.5,0);
+      SmartDashboard.putString("Line","94");
     }
     if(counter < aimFirstBall){
       this.driveBase.arcadeDrive(-0.5,0);
+      SmartDashboard.putString("Line","98");
     }
     if(counter == aimFirstBall){
       this.driveBase.arcadeDrive(0,0);
       this.shooter.setFlywheelRPM(SmartDashboard.getNumber("April Auto First Shot", Constants.AUTO_SHOT2_RPM));
+      SmartDashboard.putString("Line","103");
     }
     //feed ball
 
     if(counter == shootFirstBall){
       this.driveBase.arcadeDrive(0,0);
       this.storage.setIndexerRoller(-1);
-      
+      SmartDashboard.putString("Line","110");
     }
     if(counter == lowerIntake){
       this.storage.setIndexerRoller(0);
       this.shooter.setFlywheelRPM(0);
       this.intake.setRaised(false);
       this.intake.setIntakeRoller(1.0);
-      this.driveBase.arcadeDrive(-0.5,0);
+      SmartDashboard.putString("Line","118");
     }
-    if(counter >= lowerIntake && counter < shootSecondBall){
+    if(counter >= delayForIntake &&  counter < aimSecondBall){
       this.driveBase.arcadeDrive(-0.5,0);
+      SmartDashboard.putString("Line","122");
     }
     if(counter == aimSecondBall){
+      this.driveBase.arcadeDrive(0,0);
       this.shooter.setFlywheelRPM(SmartDashboard.getNumber("April Auto Second Shot", Constants.AUTO_SHOT2_RPM));
+      SmartDashboard.putString("Line","127");
     }
     if(counter == shootSecondBall){
       this.driveBase.arcadeDrive(0,0);
-      this.storage.setIndexerRoller(-1); 
+      this.storage.setIndexerRoller(-1);
+      SmartDashboard.putString("Line","132"); 
     }
     if(counter == driveFromSecondPosition){
       this.storage.setIndexerRoller(0);
@@ -129,13 +138,15 @@ public class AprilAuto extends CommandBase {
       this.shooter.setFlywheelRPM(0);
       this.intake.setRaised(true);
       this.driveBase.arcadeDrive(-0.5,0);
-      
+      SmartDashboard.putString("Line","140");
     }
     if(counter >= driveFromSecondPosition && counter < endDrive){
       this.driveBase.arcadeDrive(-0.5,0);
+      SmartDashboard.putString("Line","144");
     }
     if(counter == endDrive){
       this.driveBase.arcadeDrive(0,0);
+      SmartDashboard.putString("Line","148");
     }
     counter++;
   }
