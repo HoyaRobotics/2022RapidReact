@@ -48,6 +48,7 @@ public class RobotContainer {
   private final Compressor compressor = new Compressor(13,PneumaticsModuleType.CTREPCM);
   //private final Intakev2 intakev2 = new Intakev2();
   private final MarchAuto marchAuto = new MarchAuto(driveBase, shooter, storage, intake);
+  private final AprilAuto aprilAuto = new AprilAuto(driveBase, shooter, storage, intake);
 
   
 
@@ -78,6 +79,7 @@ public class RobotContainer {
 
     // Add commands to the autonomous command chooser
 m_chooser.setDefaultOption("March auto", marchAuto);
+m_chooser.addOption("April auto", aprilAuto);
 m_chooser.addOption("Multi auto", multiBallAuto);
 m_chooser.addOption("Auto1 - Taxi", driveForTime);
 //m_chooser.addOption("Auto2", auto2);

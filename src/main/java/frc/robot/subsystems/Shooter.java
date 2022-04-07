@@ -32,7 +32,7 @@ public class Shooter extends SubsystemBase {
 
   // Variables to keep track of RPM history over last 400ms.
   // Used to determine shooter stability.
-  private double[] rpmLog = new double[20];
+  private double[] rpmLog = new double[10];//April 6 change - was 20 for the length
   private int rpmLogCounter = 0;
 
   private boolean gateOpen;

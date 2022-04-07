@@ -12,22 +12,22 @@ import frc.robot.subsystems.Intakev2;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
 
-public class MarchAuto extends CommandBase {
+public class AprilAuto extends CommandBase {
   private int counter = 0;
   private int target;
   private final DriveBase driveBase;
   private final Shooter shooter;
   private final Storage storage;
   private final Intakev2 intake;
-  private int markFirstShot;
-  private int markFedFirstShot;
-  private int markReachedBall;
-  private int markStartShot2;
-  private int markFeedShot2;
-  private int markEndShot2;
-  private int markStartTurn;
-  private int markEndTurn;
-  private double leftEncoderValue;
+  private int shootFirstBall;
+  private int lowerIntake;
+  private int shootSecondBall;
+  private int raiseIntake;
+  private int driveFromSecondPosition;
+  private int endDrive;
+  private int AprilleftEncoderValue;
+  private int aimFirstBall;
+  private int aimSecondBall;
 //turn on brake mode
 //Rev shooter
 //feed ball
@@ -55,7 +55,7 @@ public class MarchAuto extends CommandBase {
 
 
   /** Creates a new MarchAuto. */
-  public MarchAuto(DriveBase driveBase, Shooter shooter, Storage storage, Intakev2 intake) {
+  public AprilAuto(DriveBase driveBase, Shooter shooter, Storage storage, Intakev2 intake) {
     this.driveBase = driveBase;
     this.shooter = shooter;
     this.storage = storage;
@@ -75,15 +75,14 @@ public class MarchAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    this.leftEncoderValue = 0;
-    this.markFirstShot = (int)(1*50);
-    this.markFedFirstShot = (int)((2*50)+markFirstShot);
-    this.markReachedBall = (int)((2*50)+markFedFirstShot);
-    this.markStartShot2 =  (int)((1.5*50)+this.markReachedBall);
-    this.markFeedShot2 = (int)((1*50)+this.markStartShot2);
-    this.markEndShot2 = (int)((1*50)+this.markFeedShot2);
-    this.markStartTurn = (int)((1*50)+this.markEndShot2+50);
-    this.markEndTurn = (int)((0.5*50)+this.markStartTurn);    
+    this.AprilleftEncoderValue = 0;
+    this.aimFirstBall = (int)(2*50);
+    this.shootFirstBall = (int)(1*50)+aimFirstBall;
+    this.lowerIntake = (int)((2*50)+shootFirstBall);
+    this.aimSecondBall = (int)((1*50)+lowerIntake);
+    this.shootSecondBall = (int)((SmartDashboard.getNumber("shootSecondBall",2*50))+aimSecondBall);
+    this.driveFromSecondPosition =  (int)((1.5*50)+this.shootSecondBall);
+    this.endDrive = (int)((1*50)+this.driveFromSecondPosition);   
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -91,55 +90,53 @@ public class MarchAuto extends CommandBase {
   public void execute() {
     if(counter == 0){
       this.driveBase.setBrakeMode();
-      this.shooter.setFlywheelRPM(1250);
+      this.driveBase.arcadeDrive(-0.5,0);
+    }
+    if(counter < aimFirstBall){
+      this.driveBase.arcadeDrive(-0.5,0);
+    }
+    if(counter == aimFirstBall){
+      this.driveBase.arcadeDrive(0,0);
+      this.shooter.setFlywheelRPM(SmartDashboard.getNumber("April Auto First Shot", Constants.AUTO_SHOT2_RPM));
     }
     //feed ball
-    if(counter == markFirstShot){
-      
-      this.storage.setIndexerRoller(-1);
-      this.intake.setRaised(false);
-    }
-    if(counter == markFedFirstShot){
-      
-      this.storage.setIndexerRoller(0);
-      this.shooter.setFlywheelRPM(0);
-      
-      this.driveBase.arcadeDrive(-0.5,0);
-      
-    }
-    if(counter == markFedFirstShot+1){
-      this.intake.setIntakeRoller(1.0);
-    }
 
-    if(counter > markFedFirstShot && counter < markReachedBall){
-      this.driveBase.arcadeDrive(-0.5,0);
-    }
-    if(counter == markReachedBall){
+    if(counter == shootFirstBall){
       this.driveBase.arcadeDrive(0,0);
-      this.intake.setIntakeRoller(0);
-      this.shooter.setFlywheelRPM(SmartDashboard.getNumber("Auto2rpm", Constants.AUTO_SHOT2_RPM));
-    }
-    if(counter == markStartShot2){
       this.storage.setIndexerRoller(-1);
-      this.leftEncoderValue = this.driveBase.getLeftEncoder();
+      
     }
-    if(counter == markEndShot2){
+    if(counter == lowerIntake){
       this.storage.setIndexerRoller(0);
       this.shooter.setFlywheelRPM(0);
+      this.intake.setRaised(false);
+      this.intake.setIntakeRoller(1.0);
+      this.driveBase.arcadeDrive(-0.5,0);
     }
-    if(counter == markStartTurn){
-      this.leftEncoderValue = this.driveBase.getLeftEncoder();
+    if(counter >= lowerIntake && counter < shootSecondBall){
+      this.driveBase.arcadeDrive(-0.5,0);
     }
-    if((counter >=markStartTurn)
-    &&((counter < markEndTurn)
-    ||(this.driveBase.getLeftEncoder()<(this.leftEncoderValue-31727)))){
-      //turn!
-//      driveBase.arcadeDrive(0.5, 1);
+    if(counter == aimSecondBall){
+      this.shooter.setFlywheelRPM(SmartDashboard.getNumber("April Auto Second Shot", Constants.AUTO_SHOT2_RPM));
     }
-    if(counter == (markEndTurn+1)){
-      driveBase.arcadeDrive(0,0);
+    if(counter == shootSecondBall){
+      this.driveBase.arcadeDrive(0,0);
+      this.storage.setIndexerRoller(-1); 
     }
-
+    if(counter == driveFromSecondPosition){
+      this.storage.setIndexerRoller(0);
+      this.intake.setIntakeRoller(0);
+      this.shooter.setFlywheelRPM(0);
+      this.intake.setRaised(true);
+      this.driveBase.arcadeDrive(-0.5,0);
+      
+    }
+    if(counter >= driveFromSecondPosition && counter < endDrive){
+      this.driveBase.arcadeDrive(-0.5,0);
+    }
+    if(counter == endDrive){
+      this.driveBase.arcadeDrive(0,0);
+    }
     counter++;
   }
 

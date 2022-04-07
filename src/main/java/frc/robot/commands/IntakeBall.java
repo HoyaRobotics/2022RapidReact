@@ -45,7 +45,7 @@ public class IntakeBall extends CommandBase {
       //add line to set storage roller to 0
     }else{
       //SmartDashboard.putString("McT","Nothing here");
-      this.storage.setIndexerRoller(-0.3);
+     // this.storage.setIndexerRoller(-0.3);//April 6 commented out to test
       //add line to set storage roller to 0.3
     }
   }

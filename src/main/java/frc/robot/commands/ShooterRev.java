@@ -51,17 +51,17 @@ public class ShooterRev extends CommandBase {
       //if based on March 30 shot testing.
       if(distance < -0.06){
         //y = -139.65x + 3072.2
-        targetRPM = -139.65*distance + 3072.2;
+        targetRPM = -139.65*distance + 3072.2 + SmartDashboard.getNumber("Offset Rev Long", 0); //add longer offset
 //        targetRPM = 3085;
       }
       if(distance < 0.22){
-        targetRPM = 3050;
+        targetRPM = 3050 + SmartDashboard.getNumber("Offset Rev Long", 0); //add longer offset
       }
       if(distance < 0.41){
-        targetRPM = 3025;
+        targetRPM = 3025 + SmartDashboard.getNumber("Offset Rev Long", 0);
       }
       else if(distance < 0.66){
-        targetRPM = 2950;
+        targetRPM = 2950 + SmartDashboard.getNumber("Offset Rev Long", 0);
       }
       else if(distance < 1.51){
         targetRPM = 2860;
