@@ -48,7 +48,12 @@ public class ShooterRev extends CommandBase {
       SmartDashboard.putNumber("TS TV", 0);
     }else{
       SmartDashboard.putNumber("TS TV", distance);
-      //if based on March 30 shot testing.
+     //if based on April 9 shot testing.
+     targetRPM = 3200+(-95.8*distance)+2.69*(Math.pow(distance,2));
+     
+     
+     
+      /*if based on March 30 shot testing.
       if(distance < -0.06){
         //y = -139.65x + 3072.2
         targetRPM = -139.65*distance + 3072.2 + SmartDashboard.getNumber("Offset Rev Long", 0); //add longer offset
@@ -108,6 +113,7 @@ public class ShooterRev extends CommandBase {
       }else{
         targetRPM = 2300;
       }
+      */
     //  targetRPM = -139.65*distance + 3072.2;
     }
 

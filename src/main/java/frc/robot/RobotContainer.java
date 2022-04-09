@@ -123,7 +123,7 @@ System.out.println(OperatorControls.getSelected());
 System.out.println((int)(OperatorMode.LOG.ordinal()));
 System.out.println((int)(SmartDashboard.getNumber("OperatorControls",0)));
 
-    if(SmartDashboard.getBoolean("NormalMode", false)){//If we are in normal mode
+    if(SmartDashboard.getBoolean("NormalMode", true)){//If we are in normal mode
       
       climbToNextRungBtn.whenPressed(new ClimbToNextRung(climber));//A
       angleClimberBtn.whenPressed(new InstantCommand(() ->{climber.toggleAngled();}));//B
