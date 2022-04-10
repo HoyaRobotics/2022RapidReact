@@ -14,10 +14,11 @@ public class AlignTurret extends CommandBase {
   private final Turret turret;
   private final Limelight limelight;
 
+  /*
   private boolean useTDM = false;
   private int tdmCount = 0;
-  private int tdmThreshold = 100;
-
+  private int tdmThreshold = 10;
+  */
 
   public AlignTurret(Turret turret, Limelight limelight) {
     this(turret, limelight, false);
@@ -26,7 +27,7 @@ public class AlignTurret extends CommandBase {
   public AlignTurret(Turret turret, Limelight limelight, boolean useTDM){
     this.turret = turret;
     this.limelight = limelight;
-    this.useTDM = useTDM;
+   // this.useTDM = useTDM;
     
     addRequirements(turret, limelight);
   }
@@ -40,26 +41,27 @@ public class AlignTurret extends CommandBase {
   
   @Override
   public void execute() {
-    double speed = (limelight.getXOffset() + 2) * TURRET_P;
+    double speed = (limelight.getXOffset()) * TURRET_P;
 
-    if(speed > 0.1)
-      speed = 0.1;
-    else if(speed < 0.1)
-      speed = -0.1;
+    if(speed > 0.15)
+      speed = 0.15;
+    else if(speed < -0.15)
+      speed = -0.15;
 
     turret.setRotatorSpeed(speed);
 
-    tdmCount++;
+  //  tdmCount++;
   }
 
   @Override
   public boolean isFinished() {
+    /*
     if(useTDM && tdmCount >= tdmThreshold){
       //Logger.warn("Turret disaster mitigation triggered");
       return true;
     }
-
-    return Math.abs((limelight.getXOffset() + 2)) < TURRET_SENSITIVITY_DEGREES;
+    */
+    return Math.abs(limelight.getXOffset()) < TURRET_SENSITIVITY_DEGREES;
   }
 
   @Override
