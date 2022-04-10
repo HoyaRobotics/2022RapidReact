@@ -41,7 +41,7 @@ public class AlignTurret extends CommandBase {
   
   @Override
   public void execute() {
-    double speed = (limelight.getXOffset()) * TURRET_P;
+    double speed = (limelight.getXOffset()+2) * TURRET_P;
 
     if(speed > 0.15)
       speed = 0.15;
@@ -61,7 +61,7 @@ public class AlignTurret extends CommandBase {
       return true;
     }
     */
-    return Math.abs(limelight.getXOffset()) < TURRET_SENSITIVITY_DEGREES;
+    return Math.abs(limelight.getXOffset()+2) < TURRET_SENSITIVITY_DEGREES;
   }
 
   @Override

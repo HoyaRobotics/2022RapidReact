@@ -12,7 +12,7 @@ import frc.robot.subsystems.Intakev2;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Storage;
 
-public class AprilAuto extends CommandBase {
+public class FourBallAuto extends CommandBase {
   private int counter = 0;
   private int target;
   private final DriveBase driveBase;
@@ -29,6 +29,7 @@ public class AprilAuto extends CommandBase {
   private int AprilleftEncoderValue;
   private int aimFirstBall;
   private int aimSecondBall;
+  private int firstTurn;
 //turn on brake mode
 //Rev shooter
 //feed ball
@@ -55,8 +56,8 @@ public class AprilAuto extends CommandBase {
 
 
 
-  /** Creates a new MarchAuto. */
-  public AprilAuto(DriveBase driveBase, Shooter shooter, Storage storage, Intakev2 intake) {
+  /** Creates a new FourBallAuto. */
+  public FourBallAuto(DriveBase driveBase, Shooter shooter, Storage storage, Intakev2 intake) {
     this.driveBase = driveBase;
     this.shooter = shooter;
     this.storage = storage;
@@ -83,7 +84,8 @@ public class AprilAuto extends CommandBase {
     this.delayForIntake = (int)((50)+lowerIntake);
     this.aimSecondBall = (int)((75)+delayForIntake);
     this.shootSecondBall = (int)((SmartDashboard.getNumber("shootSecondBall",150))+aimSecondBall);
-    this.driveFromSecondPosition =  (int)((50)+this.shootSecondBall);
+    this.firstTurn = (int)((10)+this.shootSecondBall);
+    this.driveFromSecondPosition =  (int)((100)+this.firstTurn);
     this.endDrive = (int)((150)+this.driveFromSecondPosition);
 
   }
@@ -102,7 +104,7 @@ public class AprilAuto extends CommandBase {
     }
     if(counter == aimFirstBall){
       this.driveBase.arcadeDrive(0,0);
-      this.shooter.setFlywheelRPM(SmartDashboard.getNumber("April Auto First Shot", Constants.AUTO_SHOT2_RPM));
+      this.shooter.setFlywheelRPM(SmartDashboard.getNumber("Four Ball Auto First Shot", Constants.AUTO_SHOT2_RPM));
       SmartDashboard.putString("Line","103");
     }
     //feed ball
@@ -125,7 +127,7 @@ public class AprilAuto extends CommandBase {
     }
     if(counter == aimSecondBall){
       this.driveBase.arcadeDrive(0,0);
-      this.shooter.setFlywheelRPM(SmartDashboard.getNumber("April Auto Second Shot", Constants.AUTO_SHOT2_RPM));
+      this.shooter.setFlywheelRPM(SmartDashboard.getNumber("Four Ball Auto Second Shot", Constants.AUTO_SHOT2_RPM));
       SmartDashboard.putString("Line","127");
     }
     if(counter == shootSecondBall){
@@ -133,11 +135,13 @@ public class AprilAuto extends CommandBase {
       this.storage.setIndexerRoller(-1);
       SmartDashboard.putString("Line","132"); 
     }
-    if(counter == driveFromSecondPosition){
+    if(counter == firstTurn){
       this.storage.setIndexerRoller(0);
       this.intake.setIntakeRoller(0);
       this.shooter.setFlywheelRPM(0);
-      this.intake.setRaised(true);
+      this.driveBase.arcadeDrive(-0.5,0);
+    }
+    if(counter == driveFromSecondPosition){
       this.driveBase.arcadeDrive(-0.5,0);
       SmartDashboard.putString("Line","140");
     }
@@ -146,6 +150,7 @@ public class AprilAuto extends CommandBase {
       SmartDashboard.putString("Line","144");
     }
     if(counter == endDrive){
+      this.intake.setRaised(true);
       this.driveBase.arcadeDrive(0,0);
       SmartDashboard.putString("Line","148");
     }
