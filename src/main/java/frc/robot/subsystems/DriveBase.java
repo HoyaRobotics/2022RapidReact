@@ -4,6 +4,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -74,6 +75,11 @@ public class DriveBase extends SubsystemBase {
 
   public double getRightEncoder(){
     return rightLeader.getSelectedSensorPosition();
+  }
+
+  public void setRotation(double speed){
+    leftLeader.set(ControlMode.PercentOutput, speed);
+    rightLeader.set(ControlMode.PercentOutput, speed);
   }
 
   public double getPosition(){
