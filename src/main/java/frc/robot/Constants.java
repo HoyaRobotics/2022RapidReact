@@ -72,8 +72,8 @@ public final class Constants {
         public static final int DECEL_UNITS = ACCEL_UNITS;
         
         //Turret
-        public static final double TURRET_P = 0.05;
-        public static final double TURRET_SENSITIVITY_DEGREES = 0.5;
+        public static final double TURRET_P = 0.04;
+        public static final double TURRET_SENSITIVITY_DEGREES = 1.5;
         public static final double TURRET_SENSITIVITY_VELOCITY = 0;
 
         //Shooter

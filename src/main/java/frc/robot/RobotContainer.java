@@ -49,7 +49,6 @@ public class RobotContainer {
   //private final Intakev2 intakev2 = new Intakev2();
   private final MarchAuto marchAuto = new MarchAuto(driveBase, shooter, storage, intake);
   private final AprilAuto aprilAuto = new AprilAuto(driveBase, shooter, storage, intake);
-
   
 
    // A chooser for autonomous commands
@@ -57,7 +56,7 @@ public class RobotContainer {
    SendableChooser<Command> HowToGetRPM = new SendableChooser<>();
    SendableChooser<OperatorMode> OperatorControls = new SendableChooser<>();
   
-   ShootBallManually shootBallManually = new ShootBallManually(intake, storage, shooter, limelight);
+   ShootBallManually shootBallManually = new ShootBallManually(intake, storage, shooter, limelight, turret);
    DriveForTime driveForTime = new DriveForTime(driveBase, 0.5, 2);
    Auto2 auto2;
 
