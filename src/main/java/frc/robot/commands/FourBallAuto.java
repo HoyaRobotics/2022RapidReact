@@ -30,6 +30,7 @@ public class FourBallAuto extends CommandBase {
   private int aimFirstBall;
   private int aimSecondBall;
   private int firstTurn;
+  private int intakeThirdBall;
 //turn on brake mode
 //Rev shooter
 //feed ball
@@ -66,7 +67,7 @@ public class FourBallAuto extends CommandBase {
 
 
     // Convert time in seconds to robot cycles (50 cycles/s)
-    target = (int)(12 * 50);
+    target = (int)(15 * 50);
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.driveBase);
     addRequirements(this.shooter);
@@ -82,11 +83,12 @@ public class FourBallAuto extends CommandBase {
     this.shootFirstBall = (int)(100)+aimFirstBall;
     this.lowerIntake = (int)((50)+shootFirstBall);
     this.delayForIntake = (int)((50)+lowerIntake);
-    this.aimSecondBall = (int)((75)+delayForIntake);
+    this.aimSecondBall = (int)((50)+delayForIntake);
     this.shootSecondBall = (int)((SmartDashboard.getNumber("shootSecondBall",150))+aimSecondBall);
-    this.firstTurn = (int)((10)+this.shootSecondBall);
-    this.driveFromSecondPosition =  (int)((100)+this.firstTurn);
-    this.endDrive = (int)((150)+this.driveFromSecondPosition);
+    this.firstTurn = (int)((50)+this.shootSecondBall);
+    this.driveFromSecondPosition =  (int)((50)+this.firstTurn);
+    this.intakeThirdBall = (int)((150)+this.driveFromSecondPosition);
+    this.endDrive = (int)((150)+this.intakeThirdBall);
 
   }
 
@@ -98,10 +100,12 @@ public class FourBallAuto extends CommandBase {
       this.driveBase.arcadeDrive(-0.5,0);
       SmartDashboard.putString("Line","94");
     }
+
     if(counter < aimFirstBall){
       this.driveBase.arcadeDrive(-0.5,0);
       SmartDashboard.putString("Line","98");
     }
+
     if(counter == aimFirstBall){
       this.driveBase.arcadeDrive(0,0);
       this.shooter.setFlywheelRPM(SmartDashboard.getNumber("Four Ball Auto First Shot", Constants.AUTO_SHOT2_RPM));
@@ -113,7 +117,9 @@ public class FourBallAuto extends CommandBase {
       this.driveBase.arcadeDrive(0,0);
       this.storage.setIndexerRoller(-1);
       SmartDashboard.putString("Line","110");
+      this.intake.setRaised(false);
     }
+    /*
     if(counter == lowerIntake){
       this.storage.setIndexerRoller(0);
       this.shooter.setFlywheelRPM(0);
@@ -121,7 +127,11 @@ public class FourBallAuto extends CommandBase {
       this.intake.setIntakeRoller(1.0);
       SmartDashboard.putString("Line","118");
     }
+    */
     if(counter >= delayForIntake &&  counter < aimSecondBall){
+      this.storage.setIndexerRoller(0);
+      this.shooter.setFlywheelRPM(0);
+      this.intake.setIntakeRoller(1.0);
       this.driveBase.arcadeDrive(-0.5,0);
       SmartDashboard.putString("Line","122");
     }
@@ -139,15 +149,21 @@ public class FourBallAuto extends CommandBase {
       this.storage.setIndexerRoller(0);
       this.intake.setIntakeRoller(0);
       this.shooter.setFlywheelRPM(0);
-      this.driveBase.arcadeDrive(-0.5,0);
+      this.driveBase.arcadeDrive(-0.5,2);
+      SmartDashboard.putString("Line","136");
     }
     if(counter == driveFromSecondPosition){
       this.driveBase.arcadeDrive(-0.5,0);
       SmartDashboard.putString("Line","140");
     }
-    if(counter >= driveFromSecondPosition && counter < endDrive){
+    if(counter >= driveFromSecondPosition && counter < intakeThirdBall){
       this.driveBase.arcadeDrive(-0.5,0);
+      this.intake.setRaised(false);
       SmartDashboard.putString("Line","144");
+    }
+    if(counter == intakeThirdBall){
+      this.driveBase.arcadeDrive(-0.5,0);
+      this.intake.setIntakeRoller(1.0);
     }
     if(counter == endDrive){
       this.intake.setRaised(true);
