@@ -49,7 +49,7 @@ public class ShooterRev extends CommandBase {
     }else{
       SmartDashboard.putNumber("TS TV", distance);
      //if based on April 9 shot testing.
-     targetRPM = 3200+(-95.8*distance)+2.69*(Math.pow(distance,2));
+     targetRPM = 3210+(-95.8*distance)+2.69*(Math.pow(distance,2));
      
      
      

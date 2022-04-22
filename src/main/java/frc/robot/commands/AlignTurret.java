@@ -43,10 +43,10 @@ public class AlignTurret extends CommandBase {
   public void execute() {
     double speed = (limelight.getXOffset()+2) * TURRET_P;
 
-    if(speed > 0.15)
-      speed = 0.15;
-    else if(speed < -0.15)
-      speed = -0.15;
+    if(speed > 0.35)
+      speed = 0.35;
+    else if(speed < -0.35)
+      speed = -0.35;
 
     turret.setRotatorSpeed(speed);
 

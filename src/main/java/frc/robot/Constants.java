@@ -92,5 +92,5 @@ public final class Constants {
 
         //Autonomous
         public static final double AUTO_SHOT1_RPM = 2500;
-        public static final double AUTO_SHOT2_RPM = 2750;
+        public static final double AUTO_SHOT2_RPM = 1400;
     }

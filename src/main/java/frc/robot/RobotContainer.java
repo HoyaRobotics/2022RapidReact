@@ -49,7 +49,7 @@ public class RobotContainer {
   //private final Intakev2 intakev2 = new Intakev2();
   private final MarchAuto marchAuto = new MarchAuto(driveBase, shooter, storage, intake);
   private final AprilAuto aprilAuto = new AprilAuto(driveBase, shooter, storage, intake);
-  private final FourBallAuto fourBallAuto = new FourBallAuto(driveBase, shooter, storage, intake);
+  //private final FourBallAuto fourBallAuto = new FourBallAuto(driveBase, shooter, storage, intake);
 
   
 
@@ -79,9 +79,9 @@ public class RobotContainer {
 //    auto2= new Auto2(driveBase,  intake,  storage);
 
     // Add commands to the autonomous command chooser
-m_chooser.setDefaultOption("March auto", marchAuto);
-m_chooser.addOption("April auto", aprilAuto);
-m_chooser.addOption("Four ball auto", fourBallAuto);
+m_chooser.setDefaultOption("April auto", aprilAuto);
+m_chooser.addOption("March auto", marchAuto);
+//m_chooser.addOption("Four ball auto", fourBallAuto);
 m_chooser.addOption("Multi auto", multiBallAuto);
 m_chooser.addOption("Auto1 - Taxi", driveForTime);
 //m_chooser.addOption("Auto2", auto2);
