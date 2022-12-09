@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -25,11 +27,17 @@ import static frc.robot.Constants.*;
  */
 
 public class DriveBase extends SubsystemBase {
-
+  /*
   private final WPI_TalonFX leftLeader = new WPI_TalonFX(FRONT_LEFT_DRIVE);
   private final WPI_TalonFX rightLeader = new WPI_TalonFX(FRONT_RIGHT_DRIVE);
   private final WPI_TalonFX leftFollower = new WPI_TalonFX(REAR_LEFT_DRIVE);
   private final WPI_TalonFX rightFollower = new WPI_TalonFX(REAR_RIGHT_DRIVE);
+  */
+
+  private final WPI_VictorSPX leftLeader = new WPI_VictorSPX(FRONT_LEFT_DRIVE);
+  private final WPI_VictorSPX rightLeader = new WPI_VictorSPX(FRONT_RIGHT_DRIVE);
+  private final WPI_VictorSPX leftFollower = new WPI_VictorSPX(REAR_LEFT_DRIVE);
+  private final WPI_VictorSPX rightFollower = new WPI_VictorSPX(REAR_RIGHT_DRIVE);
 
   MotorControllerGroup m_left = new MotorControllerGroup(leftLeader,leftFollower);
   MotorControllerGroup m_right = new MotorControllerGroup(rightLeader,rightFollower);
@@ -46,11 +54,11 @@ public class DriveBase extends SubsystemBase {
   leftLeader.setInverted(true);
   leftFollower.setInverted(true);
 
-    SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
-    leftLeader.configSupplyCurrentLimit(supplyLimit);
-    rightLeader.configSupplyCurrentLimit(supplyLimit);
-    leftFollower.configSupplyCurrentLimit(supplyLimit);
-    rightFollower.configSupplyCurrentLimit(supplyLimit);
+ //   SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
+ //   leftLeader.configSupplyCurrentLimit(supplyLimit);
+ //   rightLeader.configSupplyCurrentLimit(supplyLimit);
+ //   leftFollower.configSupplyCurrentLimit(supplyLimit);
+ //   rightFollower.configSupplyCurrentLimit(supplyLimit);
 
     leftLeader.setNeutralMode(NeutralMode.Coast);
     rightLeader.setNeutralMode(NeutralMode.Coast);
@@ -63,10 +71,10 @@ public class DriveBase extends SubsystemBase {
   }
 
   public void zeroEncoders(){
-    leftLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
-    rightLeader.getSensorCollection().setIntegratedSensorPosition(0,30);
-    leftFollower.getSensorCollection().setIntegratedSensorPosition(0, 30);
-    rightFollower.getSensorCollection().setIntegratedSensorPosition(0, 30);
+//    leftLeader.getSensorCollection().setIntegratedSensorPosition(0, 30);
+//    rightLeader.getSensorCollection().setIntegratedSensorPosition(0,30);
+//    leftFollower.getSensorCollection().setIntegratedSensorPosition(0, 30);
+//    rightFollower.getSensorCollection().setIntegratedSensorPosition(0, 30);
   }
 
   public double getLeftEncoder(){
@@ -111,8 +119,8 @@ public class DriveBase extends SubsystemBase {
    
   public void arcadeDrive(double throttle, double rotation){
     rotation *= -1;
-    SmartDashboard.putNumber("LeftEncoder", leftLeader.getSelectedSensorPosition());
-    SmartDashboard.putNumber("RightEncoder", rightLeader.getSelectedSensorPosition());
+//    SmartDashboard.putNumber("LeftEncoder", leftLeader.getSelectedSensorPosition());
+//    SmartDashboard.putNumber("RightEncoder", rightLeader.getSelectedSensorPosition());
     SmartDashboard.putNumber("THROTTLE rr", throttle);
     SmartDashboard.putNumber("Rotation rr", rotation);
     drive.arcadeDrive(throttle, rotation);
